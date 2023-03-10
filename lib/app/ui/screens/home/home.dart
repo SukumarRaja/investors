@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../../config/config.dart';
 import '../../../utility/utility.dart';
@@ -55,36 +56,110 @@ class Home extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(10),
-                      margin: const EdgeInsets.all(15),
+                      height: media.height * 0.2,
+                      width: media.width,
+                      margin: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: [
-                            BoxShadow(
-                                color: AppColors.white.withOpacity(.2),
-                                spreadRadius: 1,
-                                blurRadius: 1,
-                                offset: const Offset(0.2, 0.6))
-                          ]),
-                      child: Center(
-                        child: Column(
-                          children: [
-                            CommonText(
-                              text: "\u20B9 56,269",
-                              // fontColor: AppColors.secondPrimary,
-                              foreground: Paint()..shader = mainAmountGradient,
-                              fontSize: AppFontSize.fifty,
-                              isForeground: true,
-                              fontWeight: FontWeight.w500,
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: AppColors.white,
+                        boxShadow: [
+                          BoxShadow(
+                              color: AppColors.white.withOpacity(.5),
+                              spreadRadius: 2,
+                              blurRadius: 2,
+                              offset: Offset(0.4, 0.2))
+                        ],
+                        gradient: const LinearGradient(colors: [
+                          AppColors.primary,
+                          AppColors.secondPrimary,
+                        ], begin: Alignment.topRight, end: Alignment.center),
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: SizedBox(
+                              height: media.height,
+                              // color: AppColors.secondaryColor,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: media.width * 0.04),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: media.height * 0.02,
+                                    ),
+                                    const CommonText(
+                                      text: "Balance",
+                                      fontColor: AppColors.black,
+                                    ),
+                                    SizedBox(
+                                      height: media.height * 0.01,
+                                    ),
+                                    CommonText(
+                                      text: "\u20B9 56,269",
+                                      // fontColor: AppColors.secondPrimary,
+                                      foreground: Paint()
+                                        ..shader = mainAmountGradient,
+                                      fontSize: AppFontSize.twentyEight,
+                                      isForeground: true,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    SizedBox(
+                                      height: media.height * 0.04,
+                                    ),
+                                    CommonText(
+                                      text: "SUKUMAR RAJA",
+                                      // foreground: Paint()
+                                      //   ..shader = nameGradient,
+                                      // fontSize: AppFontSize.twenty,
+                                      // isForeground: true,
+                                      fontWeight: FontWeight.w700,
+                                      letterSpacing: 1,
+                                      fontColor: AppColors.primary,
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
-                            const CommonText(
-                              text: "Your Balance",
-                              fontColor: AppColors.grey,
-                              fontSize: AppFontSize.twenty,
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: SizedBox(
+                              height: media.height,
+                              // color: AppColors.tertiaryColor,
+                              child: Column(
+                                children: [
+                                  SvgPicture.asset(
+                                      "assets/svgs/mastercard.svg"),
+                                  SizedBox(
+                                    height: media.height * 0.06,
+                                  ),
+                                  const CommonText(
+                                    text: "**** **** **** 1234",
+                                    fontColor: AppColors.secondary,
+                                  ),
+                                  SizedBox(
+                                    height: media.height * 0.02,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      CommonText(
+                                        text: "* interest balance",
+                                        fontSize: AppFontSize.twelve,
+                                      ),
+                                      SizedBox(
+                                        width: media.width * 0.02,
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(
@@ -105,7 +180,7 @@ class Home extends StatelessWidget {
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.0),
                       child: CommonText(
-                        text: "Transactions",
+                        text: "Recent Transactions",
                         fontColor: AppColors.white,
                         fontSize: AppFontSize.eighteen,
                         fontWeight: FontWeight.bold,
@@ -114,7 +189,7 @@ class Home extends StatelessWidget {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: media.height / 2.2),
+                  padding: EdgeInsets.only(top: media.height / 1.95),
                   child: ListView.builder(
                       itemCount: 15,
                       shrinkWrap: true,

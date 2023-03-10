@@ -13,24 +13,28 @@ class TransactionHistoryCard extends StatelessWidget {
     return Row(
       children: [
         Container(
-          height: 70,
-          width: 70,
-          margin: const EdgeInsets.only(right: 15, left: 15, bottom: 8, top: 2),
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.white,
-              boxShadow: [
-                BoxShadow(
-                    color: AppColors.white.withOpacity(.2),
-                    spreadRadius: 1,
-                    blurRadius: 1,
-                    offset: Offset(0.2, 0.6))
-              ]),
-          child: Icon(
-            Icons.attach_money,
-            color: AppColors.green,
-          ),
-        ),
+            alignment: Alignment.center,
+            height: 70,
+            width: 70,
+            margin:
+                const EdgeInsets.only(right: 15, left: 15, bottom: 8, top: 2),
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColors.white,
+                boxShadow: [
+                  BoxShadow(
+                      color: AppColors.white.withOpacity(.2),
+                      spreadRadius: 1,
+                      blurRadius: 1,
+                      offset: Offset(0.2, 0.6))
+                ]),
+            child: CommonText(
+              text: "MAY\n2023",
+              fontColor: AppColors.green,
+              fontWeight: FontWeight.bold,
+              fontSize: AppFontSize.sixteen,
+              textAlign: TextAlign.center,
+            )),
         SizedBox(
           width: media.height * 0.02,
         ),
