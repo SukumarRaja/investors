@@ -19,147 +19,171 @@ class OtpVerify extends StatelessWidget {
         body: SingleChildScrollView(
       child: SafeArea(
         maintainBottomViewPadding: true,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.all(15.0),
-                    child: Icon(Icons.arrow_back_ios),
+        child: Container(
+          height: Get.height,
+          decoration: const BoxDecoration(
+            color: AppColors.primary,
+            gradient: LinearGradient(
+                colors: [AppColors.primary, AppColors.secondary],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: AppColors.secondPrimary,
+                      ),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: media.width * 0.01),
-                  child: const CommonText(
-                    text: "Otp Verify",
-                    fontSize: AppFontSize.twentyFour,
-                    fontWeight: FontWeight.w100,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-                height: media.height * 0.35,
-                child: SvgPicture.asset("assets/svgs/otp.svg")),
-            // SizedBox(
-            //   height: media.height * 0.09,
-            // ),
-            SizedBox(
-              height: media.height * 0.02,
-            ),
-            Center(
-              child: CommonText(
-                text:
-                    "Please type the OTP as shared on your ${AuthController.to.vEmail.text}",
-                fontColor: AppColors.black.withOpacity(.4),
-              ),
-            ),
-            SizedBox(
-              height: media.width * 0.06,
-            ),
-            Form(
-                child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    OtpInput(
-                        autoFocus: true, controller: OtpController.to.first),
-                    OtpInput(
-                        autoFocus: false, controller: OtpController.to.second),
-                    OtpInput(
-                        autoFocus: false, controller: OtpController.to.third),
-                    OtpInput(
-                        autoFocus: false, controller: OtpController.to.fourth),
-                    OtpInput(
-                        autoFocus: false, controller: OtpController.to.fifth),
-                    OtpInput(
-                        autoFocus: false, controller: OtpController.to.sixth),
-                  ],
-                ),
-              ],
-            )),
-
-            SizedBox(
-              height: media.width * 0.06,
-            ),
-            GestureDetector(
-              onTap: () {
-                Get.to(() => const ResetPassword());
-              },
-              child: Center(
-                child: Container(
-                  width: MediaQuery.of(context).size.width - 40,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    color: AppColors.primary,
-                    gradient: const LinearGradient(
-                        colors: [AppColors.primary, AppColors.secondary],
-                        begin: Alignment.topRight,
-                        end: Alignment.topLeft),
-                  ),
-                  child: const Center(
-                    child: CommonText(
-                      text: "Verify Otp",
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: media.width * 0.01),
+                    child: const CommonText(
+                      text: "Otp Verify",
+                      fontSize: AppFontSize.twentyFour,
+                      fontWeight: FontWeight.w100,
                       fontColor: AppColors.white,
-                      fontSize: AppFontSize.twenty,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                  height: media.height * 0.35,
+                  child: SvgPicture.asset("assets/svgs/otp.svg")),
+              // SizedBox(
+              //   height: media.height * 0.09,
+              // ),
+              SizedBox(
+                height: media.height * 0.02,
+              ),
+              Center(
+                child: CommonText(
+                  text:
+                      "Please type the OTP as shared on your ${AuthController.to.vEmail.text}",
+                  fontColor: AppColors.white.withOpacity(.4),
+                ),
+              ),
+              SizedBox(
+                height: media.width * 0.06,
+              ),
+              Form(
+                  child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      OtpInput(
+                          autoFocus: true, controller: OtpController.to.first),
+                      OtpInput(
+                          autoFocus: false,
+                          controller: OtpController.to.second),
+                      OtpInput(
+                          autoFocus: false, controller: OtpController.to.third),
+                      OtpInput(
+                          autoFocus: false,
+                          controller: OtpController.to.fourth),
+                      OtpInput(
+                          autoFocus: false, controller: OtpController.to.fifth),
+                      OtpInput(
+                          autoFocus: false, controller: OtpController.to.sixth),
+                    ],
+                  ),
+                ],
+              )),
+
+              SizedBox(
+                height: media.width * 0.06,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Get.to(() => const ResetPassword());
+                },
+                child: Center(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width - 40,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: AppColors.primary,
+                      boxShadow: [
+                        BoxShadow(
+                            color: AppColors.white.withOpacity(.4),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: const Offset(0.4, 0.6)),
+                      ],
+                      gradient: const LinearGradient(
+                          colors: [AppColors.primary, AppColors.secondary],
+                          begin: Alignment.topRight,
+                          end: Alignment.topLeft),
+                    ),
+                    child: const Center(
+                      child: CommonText(
+                        text: "Verify Otp",
+                        fontColor: AppColors.white,
+                        fontSize: AppFontSize.twenty,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: media.height * 0.02,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const CommonText(text: "Didn't receive?"),
-                SizedBox(width: media.width * 0.02),
-                Obx(() => GestureDetector(
-                    onTap: OtpController.to.isStartResend == true
-                        ? null
-                        : () {
-                            OtpController.to.startTimer();
-                          },
-                    child: CommonText(
-                      text: "Resend OTP",
-                      fontColor: OtpController.to.isStartResend == true
-                          ? AppColors.black.withOpacity(.3)
-                          : AppColors.primary,
-                    ))),
-              ],
-            ),
-            SizedBox(
-              height: media.height * 0.02,
-            ),
-            Obx(() => OtpController.to.isStartResend == true
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                          onTap: () {},
-                          child: CommonText(
-                            text:
-                                "Otp auto resend in ${OtpController.to.seconds} secs",
-                            fontColor: AppColors.primary,
-                          )),
-                    ],
-                  )
-                : const SizedBox()),
+              SizedBox(
+                height: media.height * 0.02,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const CommonText(text: "Didn't receive?"),
+                  SizedBox(width: media.width * 0.02),
+                  Obx(() => GestureDetector(
+                      onTap: OtpController.to.isStartResend == true
+                          ? null
+                          : () {
+                              OtpController.to.startTimer();
+                            },
+                      child: CommonText(
+                        text: "Resend OTP",
+                        fontColor: OtpController.to.isStartResend == true
+                            ? AppColors.black.withOpacity(.3)
+                            : AppColors.secondPrimary,
+                      ))),
+                ],
+              ),
+              SizedBox(
+                height: media.height * 0.02,
+              ),
+              Obx(() => OtpController.to.isStartResend == true
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                            onTap: () {},
+                            child: CommonText(
+                              text:
+                                  "Otp auto resend in ${OtpController.to.seconds} secs",
+                              fontColor: AppColors.primary,
+                            )),
+                      ],
+                    )
+                  : const SizedBox()),
 
-            SizedBox(
-              height: media.height * 0.02,
-            ),
-          ],
+              SizedBox(
+                height: media.height * 0.02,
+              ),
+            ],
+          ),
         ),
       ),
     ));

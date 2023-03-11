@@ -63,7 +63,7 @@ class _CommonTextFormFieldState extends State<CommonTextFormField> {
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                  color: AppColors.primary.withOpacity(.5), width: 2),
+                  color: AppColors.secondPrimary.withOpacity(.5), width: 2),
               borderRadius: BorderRadius.circular(8),
             ),
             errorBorder: OutlineInputBorder(

@@ -1,9 +1,8 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../controller/main.dart';
 import '../../themes/colors.dart';
+import '../history.dart';
 import '../profile.dart';
 import 'home.dart';
 
@@ -12,7 +11,7 @@ class HomeMain extends StatelessWidget {
   final List<Widget> pages = [
     const Profile(),
     const Home(),
-    const Center(child: Text("History")),
+    const TransactionHistory()
   ];
 
   @override
@@ -53,45 +52,6 @@ class HomeMain extends StatelessWidget {
       icon,
       color: color,
       size: size,
-      // shadows: const [
-      //   BoxShadow(
-      //       blurRadius: 1.0, color: AppColors.gradient, spreadRadius: 2.0),
-      // ],
     );
   }
 }
-
-// CurvedNavigationBar(
-//   // key: _bottomNavigationKey,
-//   index: MainController.to.pageIndex,
-//   height: 55.0,
-//   items: [
-//     buildDecoratedIcon(
-//         icon: Icons.person,
-//         color: MainController.to.isSelectIcon == 0
-//             ? AppColors.primary
-//             : AppColors.grey),
-//     Obx(() => buildDecoratedIcon(
-//         icon: Icons.home_filled,
-//         color: MainController.to.pageIndex == 1
-//             ? AppColors.white
-//             : AppColors.grey)),
-//     buildDecoratedIcon(
-//         icon: Icons.calendar_month,
-//         color: MainController.to.isSelectIcon == 2
-//             ? AppColors.primary
-//             : AppColors.grey),
-//   ],
-//   color: AppColors.secondary,
-//   buttonBackgroundColor: MainController.to.pageIndex == 1
-//       ? AppColors.primary
-//       : AppColors.secondary.withOpacity(.3),
-//   backgroundColor: AppColors.secondary,
-//   animationCurve: Curves.easeInOut,
-//   animationDuration: const Duration(milliseconds: 600),
-//   onTap: (index) {
-//     MainController.to.pageIndex = index;
-//     MainController.to.isSelectIcon = index;
-//   },
-//   letIndexChange: (index) => true,
-// )

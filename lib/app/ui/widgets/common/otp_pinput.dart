@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:investors/app/ui/themes/colors.dart';
 
 class OtpInput extends StatelessWidget {
   const OtpInput({Key? key, required this.autoFocus, required this.controller})
@@ -17,10 +18,15 @@ class OtpInput extends StatelessWidget {
         keyboardType: TextInputType.number,
         controller: controller,
         maxLength: 1,
-        cursorColor: Theme.of(context).primaryColor,
+        style: const TextStyle(color: AppColors.secondPrimary),
+        cursorColor: AppColors.white,
         decoration: InputDecoration(
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+                borderSide: const BorderSide(color: AppColors.white)),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+                borderSide: const BorderSide(color: AppColors.green)),
             counterText: '',
             hintStyle: const TextStyle(
                 color: Colors.black, fontSize: 20.0, fontFamily: "Oswald")),

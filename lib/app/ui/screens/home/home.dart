@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '../../../config/config.dart';
-import '../../../utility/utility.dart';
 import '../../themes/colors.dart';
 import '../../themes/font_size.dart';
+import '../../widgets/common/common_alert.dart';
 import '../../widgets/common/common_text.dart';
-import '../../widgets/transaction_history_card.dart';
+import '../../widgets/main_balance_card.dart';
+import '../../widgets/transaction_history_card_home.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -30,6 +29,8 @@ class Home extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+
+                    // user name
                     Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: media.width * 0.04,
@@ -55,128 +56,66 @@ class Home extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Container(
-                      height: media.height * 0.2,
-                      width: media.width,
-                      margin: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: AppColors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              color: AppColors.white.withOpacity(.5),
-                              spreadRadius: 2,
-                              blurRadius: 2,
-                              offset: Offset(0.4, 0.2))
-                        ],
-                        gradient: const LinearGradient(colors: [
-                          AppColors.primary,
-                          AppColors.secondPrimary,
-                        ], begin: Alignment.topRight, end: Alignment.center),
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: SizedBox(
-                              height: media.height,
-                              // color: AppColors.secondaryColor,
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: media.width * 0.04),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      height: media.height * 0.02,
-                                    ),
-                                    const CommonText(
-                                      text: "Balance",
-                                      fontColor: AppColors.black,
-                                    ),
-                                    SizedBox(
-                                      height: media.height * 0.01,
-                                    ),
-                                    CommonText(
-                                      text: "\u20B9 56,269",
-                                      // fontColor: AppColors.secondPrimary,
-                                      foreground: Paint()
-                                        ..shader = mainAmountGradient,
-                                      fontSize: AppFontSize.twentyEight,
-                                      isForeground: true,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    SizedBox(
-                                      height: media.height * 0.04,
-                                    ),
-                                    CommonText(
-                                      text: "SUKUMAR RAJA",
-                                      // foreground: Paint()
-                                      //   ..shader = nameGradient,
-                                      // fontSize: AppFontSize.twenty,
-                                      // isForeground: true,
-                                      fontWeight: FontWeight.w700,
-                                      letterSpacing: 1,
-                                      fontColor: AppColors.primary,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: SizedBox(
-                              height: media.height,
-                              // color: AppColors.tertiaryColor,
-                              child: Column(
-                                children: [
-                                  SvgPicture.asset(
-                                      "assets/svgs/mastercard.svg"),
-                                  SizedBox(
-                                    height: media.height * 0.06,
-                                  ),
-                                  const CommonText(
-                                    text: "**** **** **** 1234",
-                                    fontColor: AppColors.secondary,
-                                  ),
-                                  SizedBox(
-                                    height: media.height * 0.02,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      CommonText(
-                                        text: "* interest balance",
-                                        fontSize: AppFontSize.twelve,
-                                      ),
-                                      SizedBox(
-                                        width: media.width * 0.02,
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+
+                    // main interest balance card
+                    const MainBalanceCard(),
                     SizedBox(
                       height: media.height * 0.03,
                     ),
+
+                    // four menus
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        buildContainer(context: context),
-                        buildWhiteContainer(context: context),
-                        buildWhiteContainer(context: context),
-                        buildWhiteContainer(context: context),
+                        buildContainer(
+                            context: context,
+                            onPressed: () {
+                              successAlert(context,
+                                  content: "Under Development",
+                                  confirmButtonPressed: () {
+                                Get.back();
+                              });
+                            }),
+                        buildWhiteContainer(
+                            context: context,
+                            title: "Analytics",
+                            icon: Icons.bar_chart,
+                            onPressed: () {
+                              successAlert(context,
+                                  content: "Under Development",
+                                  confirmButtonPressed: () {
+                                Get.back();
+                              });
+                            }),
+                        buildWhiteContainer(
+                            context: context,
+                            title: "Chart",
+                            icon: Icons.pie_chart,
+                            onPressed: () {
+                              successAlert(context,
+                                  content: "Under Development",
+                                  confirmButtonPressed: () {
+                                Get.back();
+                              });
+                            }),
+                        buildWhiteContainer(
+                            context: context,
+                            title: "Add Card",
+                            icon: Icons.credit_card,
+                            onPressed: () {
+                              successAlert(context,
+                                  content: "Under Development",
+                                  confirmButtonPressed: () {
+                                Get.back();
+                              });
+                            }),
                       ],
                     ),
                     SizedBox(
                       height: media.height * 0.03,
                     ),
+
+                    // recent transactions text
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.0),
                       child: CommonText(
@@ -188,13 +127,15 @@ class Home extends StatelessWidget {
                     ),
                   ],
                 ),
+
+                // recent transactions list
                 Padding(
                   padding: EdgeInsets.only(top: media.height / 1.95),
                   child: ListView.builder(
                       itemCount: 15,
                       shrinkWrap: true,
                       itemBuilder: (context, int index) {
-                        return const TransactionHistoryCard();
+                        return const TransactionHistoryCardHome();
                       }),
                 ),
               ],
@@ -203,66 +144,77 @@ class Home extends StatelessWidget {
     );
   }
 
-  Column buildContainer({required context}) {
+  GestureDetector buildContainer(
+      {required context, required Function() onPressed}) {
     var media = MediaQuery.of(context).size;
 
-    return Column(
-      children: [
-        Container(
-          height: 70,
-          width: 70,
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.secondPrimary,
-              boxShadow: [
-                BoxShadow(
-                    color: AppColors.white.withOpacity(.2),
-                    spreadRadius: 1,
-                    blurRadius: 1,
-                    offset: const Offset(0.2, 0.6))
-              ]),
-          child: const Icon(
-            Icons.send,
+    return GestureDetector(
+      onTap: onPressed,
+      child: Column(
+        children: [
+          Container(
+            height: 70,
+            width: 70,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColors.secondPrimary,
+                boxShadow: [
+                  BoxShadow(
+                      color: AppColors.white.withOpacity(.2),
+                      spreadRadius: 1,
+                      blurRadius: 1,
+                      offset: const Offset(0.2, 0.6))
+                ]),
+            child: const Icon(
+              Icons.send,
+            ),
           ),
-        ),
-        SizedBox(
-          height: media.height * 0.007,
-        ),
-        const CommonText(
-          text: "Send",
-          fontColor: AppColors.secondPrimary,
-          fontSize: AppFontSize.fifteen,
-        ),
-      ],
+          SizedBox(
+            height: media.height * 0.007,
+          ),
+          const CommonText(
+            text: "Invest",
+            fontColor: AppColors.secondPrimary,
+            fontSize: AppFontSize.fifteen,
+          ),
+        ],
+      ),
     );
   }
 
-  Column buildWhiteContainer({required context}) {
+  GestureDetector buildWhiteContainer(
+      {required context,
+      required title,
+      required icon,
+      required Function() onPressed}) {
     var media = MediaQuery.of(context).size;
-    return Column(
-      children: [
-        Container(
-          height: 70,
-          width: 70,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            // color: AppColors.primary,
-            border: Border.all(color: AppColors.white, width: 2),
+    return GestureDetector(
+      onTap: onPressed,
+      child: Column(
+        children: [
+          Container(
+            height: 70,
+            width: 70,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              // color: AppColors.primary,
+              border: Border.all(color: AppColors.white, width: 2),
+            ),
+            child: Icon(
+              icon,
+              color: AppColors.white,
+            ),
           ),
-          child: const Icon(
-            Icons.analytics,
-            color: AppColors.white,
+          SizedBox(
+            height: media.height * 0.007,
           ),
-        ),
-        SizedBox(
-          height: media.height * 0.007,
-        ),
-        const CommonText(
-          text: "Analytics",
-          fontColor: AppColors.white,
-          fontSize: AppFontSize.fifteen,
-        ),
-      ],
+          CommonText(
+            text: title,
+            fontColor: AppColors.white,
+            fontSize: AppFontSize.fifteen,
+          ),
+        ],
+      ),
     );
   }
 }
