@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:investors/app/ui/screens/onboard.dart';
+import 'package:investors/app/ui/screens/withdraw.dart';
 import '../ui/screens/home/home.dart';
 import '../ui/screens/home/main.dart';
 import '../ui/screens/initial.dart';
@@ -30,6 +31,11 @@ class AppRoutes {
     GetPage(
       name: "/onBoard",
       page: () => const OnBoarding(),
+      transition: Transition.zoom,
+    ),
+    GetPage(
+      name: "/withdraw",
+      page: () => const WithDraw(),
       transition: Transition.zoom,
     ),
 

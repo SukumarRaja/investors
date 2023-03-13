@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../themes/colors.dart';
 
-
 class CommonTextFormField extends StatefulWidget {
   const CommonTextFormField(
       {Key? key,
@@ -13,7 +12,9 @@ class CommonTextFormField extends StatefulWidget {
       this.maxLength,
       this.errorText,
       this.prefixIcon,
-      this.enableBorderSide = false})
+      this.enableBorderSide = false,
+      this.keyboardType,
+      this.isPrefixIcon = true})
       : super(key: key);
   final String hintText;
   final String? errorText;
@@ -21,8 +22,10 @@ class CommonTextFormField extends StatefulWidget {
   final String? Function(String?)? validator;
   final bool? obscureText;
   final bool? enableBorderSide;
+  final bool? isPrefixIcon;
   final int? maxLength;
   final IconData? prefixIcon;
+  final TextInputType? keyboardType;
 
   @override
   State<CommonTextFormField> createState() => _CommonTextFormFieldState();
@@ -42,6 +45,7 @@ class _CommonTextFormFieldState extends State<CommonTextFormField> {
         cursorColor: AppColors.primary,
         controller: widget.controller,
         maxLength: widget.maxLength,
+        keyboardType: widget.keyboardType,
         maxLines: 1,
         obscuringCharacter: "*",
         obscureText: widget.obscureText == true ? !passwordVisible : false,
@@ -71,7 +75,8 @@ class _CommonTextFormFieldState extends State<CommonTextFormField> {
               borderRadius: BorderRadius.circular(8),
             ),
             suffixIcon: showPassword(),
-            prefixIcon: Icon(widget.prefixIcon)),
+            prefixIcon:
+                widget.isPrefixIcon == true ? Icon(widget.prefixIcon) : null),
       ),
     );
   }

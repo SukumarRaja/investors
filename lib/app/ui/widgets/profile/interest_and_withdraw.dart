@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:investors/app/ui/screens/withdraw.dart';
 
 import '../../../utility/utility.dart';
 import '../../themes/colors.dart';
@@ -52,30 +54,35 @@ class InterestAndWithdraw extends StatelessWidget {
         ),
         Expanded(
           flex: 2,
-          child: Container(
-            alignment: Alignment.center,
-            height: 50,
-            padding: const EdgeInsets.all(10),
-            margin: const EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(8.0),
-              boxShadow: [
-                BoxShadow(
-                    color: AppColors.white.withOpacity(.5),
-                    spreadRadius: 1,
-                    blurRadius: 1,
-                    offset: const Offset(0.2, 0.6)),
-              ],
-              gradient: const LinearGradient(
-                  colors: [AppColors.primary, AppColors.secondary],
-                  begin: Alignment.topRight,
-                  end: Alignment.topLeft),
-            ),
-            child: const CommonText(
-              text: "Withdraw",
-              fontSize: AppFontSize.twenty,
-              fontColor: AppColors.white,
+          child: GestureDetector(
+            onTap: (){
+              Get.to(()=>WithDraw());
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 50,
+              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(8.0),
+                boxShadow: [
+                  BoxShadow(
+                      color: AppColors.white.withOpacity(.5),
+                      spreadRadius: 1,
+                      blurRadius: 1,
+                      offset: const Offset(0.2, 0.6)),
+                ],
+                gradient: const LinearGradient(
+                    colors: [AppColors.primary, AppColors.secondary],
+                    begin: Alignment.topRight,
+                    end: Alignment.topLeft),
+              ),
+              child: const CommonText(
+                text: "Withdraw",
+                fontSize: AppFontSize.twenty,
+                fontColor: AppColors.white,
+              ),
             ),
           ),
         ),

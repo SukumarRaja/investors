@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../controller/withdraw.dart';
 import '../../themes/colors.dart';
 import 'common_text.dart';
+import 'common_toast.dart';
 
 commonAlertDialog(BuildContext context,
     {required String content, required Function() confirmButtonPressed}) {
@@ -432,3 +434,122 @@ dynamic loadingAlertDialog(BuildContext context, {required Widget child}) {
   );
 }
 
+withDrawRequestAlert(BuildContext context,
+    {required String content, required Function() onPressed}) {
+  var media = MediaQuery.of(context).size;
+  // set up the buttons
+  Widget cancelButton = TextButton(
+    child: Container(
+      height: 30,
+      width: 60,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10), color: Colors.red),
+      child: const Center(
+        child: Text(
+          "Cancel",
+          style: TextStyle(color: AppColors.black),
+        ),
+      ),
+    ),
+    onPressed: () {
+      if (kDebugMode) {
+        print("print");
+      }
+      Get.back();
+    },
+  );
+  Widget continueButton = TextButton(
+    onPressed: onPressed,
+    child: Container(
+      height: 30,
+      width: 60,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10), color: Colors.green),
+      child: const Center(
+        child: Text(
+          "Confirm",
+          style: TextStyle(color: AppColors.black),
+        ),
+      ),
+    ),
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(15.0),
+      ),
+    ),
+    backgroundColor: Colors.grey.shade300,
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        // Icon(
+        //   Icons.warning_amber_rounded,
+        //   color: Colors.red,
+        //   size: 25,
+        // ),
+        SizedBox(
+          width: 10,
+        ),
+        // CommonText(text: "Alert")
+      ],
+    ),
+    content: Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          content,
+          style: const TextStyle(fontSize: 16, color: AppColors.black),
+        ),
+        SizedBox(
+          height: media.height * 0.02,
+        ),
+        SizedBox(
+            height: 60,
+            width: media.width,
+            child: Form(
+                key: WithDrawController.to.key,
+                child: TextFormField(
+                  controller: WithDrawController.to.amount,
+                  decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: AppColors.secondPrimary.withOpacity(.5),
+                          width: 2),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: AppColors.black.withOpacity(.5), width: 2),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    hintText: "enter amount",
+                  ),
+                  validator: (data) {
+                    if (data!.isEmpty || data == "") {
+                      return commonToast(msg: "please fill the reject reason");
+                    } else if (data.length < 8) {
+                      return commonToast(msg: "reason minimum 8 char");
+                    }
+                    return null;
+                  },
+                )))
+      ],
+    ),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../ui/themes/colors.dart';
 
 final Shader mainAmountGradient = const LinearGradient(
@@ -17,3 +18,18 @@ final Shader historyAmountGradient = const LinearGradient(
 ).createShader(
   const Rect.fromLTWH(150.0, 0.0, 550.0, 0.0),
 );
+
+String formatAmount({required amount}) {
+  var formatter = NumberFormat('#,##,###');
+  var v = formatter.format(amount);
+  debugPrint("formatted amount is $v");
+  return v;
+}
+
+int stringToInt({required text}) {
+  var myInt = int.parse(text);
+  debugPrint("$myInt");
+  return myInt;
+}
+
+
