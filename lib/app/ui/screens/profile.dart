@@ -3,10 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:investors/app/config/config.dart';
 import '../../controller/dashboard.dart';
+import '../../controller/profile.dart';
 import '../../utility/utility.dart';
 import '../themes/colors.dart';
 import '../themes/font_size.dart';
 import '../widgets/common/common_alert.dart';
+import '../widgets/common/common_loading.dart';
 import '../widgets/common/common_text.dart';
 import '../widgets/profile/interest_and_withdraw.dart';
 import '../widgets/profile/transactions_count.dart';
@@ -178,6 +180,26 @@ class Profile extends StatelessWidget {
                     ),
                   ),
                 ),
+
+                Obx(() => ProfileController.to.logoutLoading == true
+                    ? Container(
+                        height: media.height,
+                        width: media.width,
+                        color: AppColors.black.withOpacity(.6),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const CommonNormalLoading(),
+                            SizedBox(
+                              height: media.height * 0.02,
+                            ),
+                            const CommonText(
+                              text: "Logging out...",
+                              fontColor: AppColors.white,
+                            )
+                          ],
+                        ))
+                    : const SizedBox())
               ],
             )),
       ),
@@ -187,8 +209,10 @@ class Profile extends StatelessWidget {
   GestureDetector logoutButton(BuildContext context, Size media) {
     return GestureDetector(
       onTap: () {
-        commonAlertDialog(context,
-            content: "Are you sure logout", confirmButtonPressed: () {});
+        commonAlertDialog(context, content: "Are you sure logout",
+            confirmButtonPressed: () {
+          ProfileController.to.logout();
+        });
       },
       child: Container(
           alignment: Alignment.center,
