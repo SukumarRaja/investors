@@ -6,7 +6,7 @@ import '../../themes/colors.dart';
 
 class CommonLoading extends StatelessWidget {
   const CommonLoading(
-      {Key? key, this.color = AppColors.primary, this.size = 80})
+      {Key? key, this.color = AppColors.white, this.size = 80})
       : super(key: key);
   final Color color;
   final double size;

@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../data/repository/auth.dart';
 import '../ui/screens/home/main.dart';
 import '../ui/screens/initial.dart';
 import '../ui/screens/otp_verify.dart';
 
+import '../ui/widgets/common/common_alert.dart';
+import '../ui/widgets/common/common_print.dart';
+import '../ui/widgets/common/common_snackbar.dart';
 import 'main.dart';
 
 class AuthController extends GetxController {
   static AuthController get to => Get.put(AuthController());
 
-  // final repository = AuthRepository();
+  final repository = AuthRepository();
 
   final loginKey = GlobalKey<FormState>();
   final registerKey = GlobalKey<FormState>();
@@ -96,8 +100,8 @@ class AuthController extends GetxController {
 
   loginCheck() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    var token = preferences.getString('patientId');
-    debugPrint("patientId $token");
+    var token = preferences.getString('investorID');
+    debugPrint("investorID $token");
     if (token != null && token.isNotEmpty) {
       return true;
     } else {
@@ -137,40 +141,44 @@ class AuthController extends GetxController {
   }
 
   login() async {
-    // loginLoading = true;
-    // var body = {"email": lEmail.text.trimRight(), "password": lPassword.text};
-    // try {
-    //   var res = await repository.login(body: body);
-    //   if (statusCode == 200) {
-    //     if (res['status'] == "200") {
-    //       loginLoading = false;
-    //       commonPrint(status: res['status'], msg: res['message']);
-    //       Map storedData = {"patientId": "${res['patient_id']}"};
-    //       storeLocalDevice(body: storedData);
-    //       Get.off(() => HomeMain());
-    //       commonSnackBar(title: "Success", msg: "Login Successfully");
-    //       loginFieldsEmpty();
-    //     } else if (res['status'] == "422") {
-    //       loginLoading = false;
-    //       commonPrint(
-    //           status: res['status'],
-    //           msg: "${res['message']}\nEmail or Password Wrong");
-    //       errorAlert(Get.context!,
-    //           content: "${res['message']}\nEmail or Password Wrong",
-    //           confirmButtonPressed: () {
-    //         Get.back();
-    //       });
-    //     }
-    //   } else {
-    //     loginLoading = false;
-    //     commonPrint(status: "500", msg: "Error from server or No Internet");
-    //   }
-    // } catch (e) {
-    //   loginLoading = false;
-    //   commonPrint(
-    //       status: "$statusCode",
-    //       msg: "Error from login due to data mismatch or format $e");
-    // }
+    loginLoading = true;
+    var body = {
+      "email": lEmail.text.trimRight(),
+      "password": lPassword.text,
+      "action": "login"
+    };
+    try {
+      var res = await repository.login(body: body);
+      if (statusCode == 200) {
+        if (res['status'] == "200") {
+          loginLoading = false;
+          commonPrint(status: res['status'], msg: res['message']);
+          Map storedData = {"investorID": "${res['investor_id']}"};
+          storeLocalDevice(body: storedData);
+          Get.off(() => HomeMain());
+          commonSnackBar(title: "Success", msg: "Login Successfully");
+          loginFieldsEmpty();
+        } else if (res['status'] == "422") {
+          loginLoading = false;
+          commonPrint(
+              status: res['status'],
+              msg: "${res['message']}\nEmail or Password Wrong");
+          errorAlert(Get.context!,
+              content: "${res['message']}\nEmail or Password Wrong",
+              confirmButtonPressed: () {
+            Get.back();
+          });
+        }
+      } else {
+        loginLoading = false;
+        commonPrint(status: "500", msg: "Error from server or No Internet");
+      }
+    } catch (e) {
+      loginLoading = false;
+      commonPrint(
+          status: "$statusCode",
+          msg: "Error from login due to data mismatch or format $e");
+    }
   }
 
   register() async {

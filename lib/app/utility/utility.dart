@@ -32,4 +32,33 @@ int stringToInt({required text}) {
   return myInt;
 }
 
+String dateToYear({required date}) {
+  var d = date;
+  final year = DateFormat.yM().format(DateTime.parse(d));
+  debugPrint("year is $year");
+  return year;
+}
 
+String monthNameToMonthNumber({required String date}) {
+  var dateTime = DateFormat("yyyy-MM-dd").parse(date, true);
+  // var localTime = dateTime.toLocal();
+  var outputFormat = DateFormat('dd-MM');
+  var outputDate = outputFormat.format(dateTime);
+  return outputDate;
+}
+
+String normalDateToIndividualYear({required String date}) {
+  var dateTime = DateFormat("yyyy-MM-dd").parse(date, true);
+  // var localTime = dateTime.toLocal();
+  var outputFormat = DateFormat('yy');
+  var outputDate = outputFormat.format(dateTime);
+  return outputDate;
+}
+
+String getIsoToLocalFormat({required String date}) {
+  var dateTime = DateFormat("yyyy-MM-dd HH:mm:ss").parse(date, true);
+  // var localTime = dateTime.toLocal();
+  var outputFormat = DateFormat('hh:mm a');
+  var outputDate = outputFormat.format(dateTime);
+  return outputDate;
+}

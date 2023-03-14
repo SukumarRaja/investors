@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../controller/dashboard.dart';
 import '../../../controller/main.dart';
 import '../../themes/colors.dart';
 import '../history.dart';
@@ -16,34 +17,43 @@ class HomeMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: Obx(() => BottomNavigationBar(
-            backgroundColor: AppColors.secondary,
-            currentIndex: MainController.to.pageIndex,
-            type: BottomNavigationBarType.fixed,
-            unselectedItemColor: AppColors.grey,
-            elevation: 25,
-            selectedItemColor: AppColors.secondPrimary,
-            showUnselectedLabels: false,
-            showSelectedLabels: true,
-            selectedLabelStyle: const TextStyle(fontFamily: "Oswald"),
-            selectedIconTheme:
-                const IconThemeData(color: AppColors.secondPrimary),
-            unselectedIconTheme: const IconThemeData(color: AppColors.grey),
-            onTap: (data) {
-              MainController.to.pageIndex = data;
-            },
-            items: const [
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.person), label: "Profile"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.home_filled), label: "Home"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.calendar_month), label: "History"),
-            ],
-          )),
-      body: Obx(() => pages[MainController.to.pageIndex]),
-    );
+    return GetBuilder(
+        init: DashboardController(),
+        initState: (_) {
+          DashboardController.to.getProfile();
+          DashboardController.to.getLedger();
+        },
+        builder: (_) {
+          return Scaffold(
+            bottomNavigationBar: Obx(() => BottomNavigationBar(
+                  backgroundColor: AppColors.secondary,
+                  currentIndex: MainController.to.pageIndex,
+                  type: BottomNavigationBarType.fixed,
+                  unselectedItemColor: AppColors.grey,
+                  elevation: 25,
+                  selectedItemColor: AppColors.secondPrimary,
+                  showUnselectedLabels: false,
+                  showSelectedLabels: true,
+                  selectedLabelStyle: const TextStyle(fontFamily: "Oswald"),
+                  selectedIconTheme:
+                      const IconThemeData(color: AppColors.secondPrimary),
+                  unselectedIconTheme:
+                      const IconThemeData(color: AppColors.grey),
+                  onTap: (data) {
+                    MainController.to.pageIndex = data;
+                  },
+                  items: const [
+                    BottomNavigationBarItem(
+                        icon: Icon(Icons.person), label: "Profile"),
+                    BottomNavigationBarItem(
+                        icon: Icon(Icons.home_filled), label: "Home"),
+                    BottomNavigationBarItem(
+                        icon: Icon(Icons.calendar_month), label: "History"),
+                  ],
+                )),
+            body: Obx(() => pages[MainController.to.pageIndex]),
+          );
+        });
   }
 
   Icon buildDecoratedIcon(

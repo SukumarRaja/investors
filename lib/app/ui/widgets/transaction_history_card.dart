@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import '../../controller/dashboard.dart';
 import '../../utility/utility.dart';
 import '../themes/colors.dart';
 import '../themes/font_size.dart';
 import 'common/common_text.dart';
 
 class TransactionHistoryCard extends StatelessWidget {
-  const TransactionHistoryCard({Key? key}) : super(key: key);
+  const TransactionHistoryCard({Key? key, required this.index})
+      : super(key: key);
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
       child: Container(
         width: media.width,
         padding:
@@ -49,8 +52,9 @@ class TransactionHistoryCard extends StatelessWidget {
                       begin: Alignment.topRight,
                       end: Alignment.topLeft),
                 ),
-                child: const CommonText(
-                  text: "MAY\n2023",
+                child: CommonText(
+                  text:
+                      "${monthNameToMonthNumber(date: "${DashboardController.to.ledgerDetails[index].withdrawOn}")}-${normalDateToIndividualYear(date: "${DashboardController.to.ledgerDetails[index].withdrawOn}")}",
                   fontColor: AppColors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: AppFontSize.sixteen,
@@ -59,16 +63,23 @@ class TransactionHistoryCard extends StatelessWidget {
             Positioned(
               bottom: 0,
               child: Row(
-                children: const [
+                children: [
                   CommonText(
                     text: "Status : ",
                     fontSize: AppFontSize.fourteen,
                     fontColor: AppColors.black,
                   ),
                   CommonText(
-                    text: "Completed",
+                    text: DashboardController.to.ledgerDetails[index].status ==
+                            "0"
+                        ? "Pending"
+                        : "Completed",
                     fontSize: AppFontSize.fourteen,
-                    fontColor: AppColors.secondary,
+                    fontColor:
+                        DashboardController.to.ledgerDetails[index].status ==
+                                "0"
+                            ? AppColors.sandal
+                            : AppColors.secondary,
                     fontWeight: FontWeight.w700,
                   ),
                 ],
@@ -78,14 +89,15 @@ class TransactionHistoryCard extends StatelessWidget {
               bottom: 0,
               right: 0,
               child: Row(
-                children: const [
+                children: [
                   CommonText(
                     text: "Time : ",
                     fontSize: AppFontSize.fourteen,
                     fontColor: AppColors.black,
                   ),
                   CommonText(
-                    text: "10:02 PM",
+                    text:
+                        "${getIsoToLocalFormat(date: "${DashboardController.to.ledgerDetails[index].createdOn}")}",
                     fontSize: AppFontSize.fourteen,
                     fontColor: AppColors.secondary,
                     fontWeight: FontWeight.w700,
@@ -121,16 +133,25 @@ class TransactionHistoryCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   CommonText(
-                    text: "\u20B9 1500",
+                    text:
+                        "\u20B9 ${DashboardController.to.ledgerDetails[index].amount}",
                     fontWeight: FontWeight.bold,
                     isForeground: true,
                     fontSize: AppFontSize.twenty,
                     foreground: Paint()..shader = historyAmountGradient,
                   ),
-                  const CommonText(
-                    text: "Credited",
+                  CommonText(
+                    text: DashboardController
+                                .to.ledgerDetails[index].amountType ==
+                            "Cr"
+                        ? "Credited"
+                        : "Debited",
                     fontSize: AppFontSize.fourteen,
-                    fontColor: AppColors.green,
+                    fontColor: DashboardController
+                                .to.ledgerDetails[index].amountType ==
+                            "Cr"
+                        ? AppColors.green
+                        : AppColors.red,
                   ),
                 ],
               ),

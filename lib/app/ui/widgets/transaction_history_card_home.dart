@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:investors/app/controller/dashboard.dart';
+import '../../utility/utility.dart';
 import '../themes/colors.dart';
 import '../themes/font_size.dart';
 import 'common/common_text.dart';
 
 class TransactionHistoryCardHome extends StatelessWidget {
-  const TransactionHistoryCardHome({Key? key}) : super(key: key);
+  const TransactionHistoryCardHome({Key? key, required this.index})
+      : super(key: key);
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
+    var s = monthNameToMonthNumber(date: '2030-02-23');
+    print("jkljkl $s");
     return Row(
       children: [
         Container(
@@ -28,8 +35,9 @@ class TransactionHistoryCardHome extends StatelessWidget {
                       offset: Offset(0.2, 0.6))
                 ]),
             child: CommonText(
-              text: "MAY\n2023",
-              fontColor: AppColors.green,
+              text:
+                  "${monthNameToMonthNumber(date: "${DashboardController.to.ledgerDetails[index].withdrawOn}")}-${normalDateToIndividualYear(date: "${DashboardController.to.ledgerDetails[index].withdrawOn}")}",
+              fontColor: AppColors.secondary,
               fontWeight: FontWeight.bold,
               fontSize: AppFontSize.sixteen,
               textAlign: TextAlign.center,
@@ -57,14 +65,21 @@ class TransactionHistoryCardHome extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             CommonText(
-              text: "\u20B9 1500",
+              text:
+                  "\u20B9 ${DashboardController.to.ledgerDetails[index].amount}",
               fontWeight: FontWeight.bold,
               fontColor: AppColors.white,
             ),
             CommonText(
-              text: "Received",
+              text:
+                  DashboardController.to.ledgerDetails[index].amountType == "Cr"
+                      ? "Credited"
+                      : "Debited",
               fontSize: AppFontSize.fourteen,
-              fontColor: AppColors.green,
+              fontColor:
+                  DashboardController.to.ledgerDetails[index].amountType == "Cr"
+                      ? AppColors.green
+                      : AppColors.red,
             ),
           ],
         ),

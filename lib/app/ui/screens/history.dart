@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investors/app/ui/widgets/common/no-data.dart';
+import '../../controller/dashboard.dart';
 import '../themes/colors.dart';
+import '../widgets/common/common_loading.dart';
 import '../widgets/transaction_history_card.dart';
 
 class TransactionHistory extends StatelessWidget {
@@ -109,15 +112,27 @@ class TransactionHistory extends StatelessWidget {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: media.height / 11),
-                  child: ListView.builder(
-                      itemCount: 15,
-                      shrinkWrap: true,
-                      itemBuilder: (context, int index) {
-                        return const TransactionHistoryCard();
-                      }),
-                )
+                Obx(() => DashboardController.to.getLedgerLoading == true
+                    ? const CommonLoading(
+                        size: 100,
+                      )
+                    : DashboardController.to.isLedgerEmpty == true
+                        ? NoData(
+                            msg: "No Transactions History",
+                            height: media.height / 1.8,
+                          )
+                        : Padding(
+                            padding: EdgeInsets.only(top: media.height / 11),
+                            child: ListView.builder(
+                                itemCount:
+                                    DashboardController.to.ledgerDetails.length,
+                                shrinkWrap: true,
+                                itemBuilder: (context, int index) {
+                                  return TransactionHistoryCard(
+                                    index: index,
+                                  );
+                                }),
+                          ))
               ],
             )),
       ),

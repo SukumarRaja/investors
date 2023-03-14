@@ -14,7 +14,8 @@ class CommonTextFormField extends StatefulWidget {
       this.prefixIcon,
       this.enableBorderSide = false,
       this.keyboardType,
-      this.isPrefixIcon = true})
+      this.isPrefixIcon = true,
+      this.fontSize = 14})
       : super(key: key);
   final String hintText;
   final String? errorText;
@@ -26,6 +27,7 @@ class CommonTextFormField extends StatefulWidget {
   final int? maxLength;
   final IconData? prefixIcon;
   final TextInputType? keyboardType;
+  final double? fontSize;
 
   @override
   State<CommonTextFormField> createState() => _CommonTextFormFieldState();
@@ -37,9 +39,9 @@ class _CommonTextFormFieldState extends State<CommonTextFormField> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        style: const TextStyle(
+        style: TextStyle(
           fontFamily: "Oswald",
-          fontSize: 14,
+          fontSize: widget.fontSize,
         ),
         validator: widget.validator,
         cursorColor: AppColors.primary,

@@ -95,11 +95,10 @@ class Login extends StatelessWidget {
                     ? const CommonNormalLoading()
                     : GestureDetector(
                         onTap: () {
-                          Get.to(() => HomeMain());
-                          // if (AuthController.to.loginKey.currentState!
-                          //     .validate()) {
-                          //   AuthController.to.login();
-                          // }
+                          if (AuthController.to.loginKey.currentState!
+                              .validate()) {
+                            AuthController.to.login();
+                          }
                         },
                         child: Center(
                           child: Container(

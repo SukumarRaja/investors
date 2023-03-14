@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investors/app/ui/widgets/common/common_loading.dart';
+import 'package:investors/app/ui/widgets/common/no-data.dart';
+import 'package:shimmer/shimmer.dart';
+import '../../../controller/dashboard.dart';
 import '../../themes/colors.dart';
 import '../../themes/font_size.dart';
 import '../../widgets/common/common_alert.dart';
@@ -29,7 +33,6 @@ class Home extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     // user name
                     Padding(
                       padding: EdgeInsets.symmetric(
@@ -38,12 +41,13 @@ class Home extends StatelessWidget {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const CommonText(
-                            text: "Hello, User",
-                            fontColor: AppColors.white,
-                            fontSize: AppFontSize.twenty,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          Obx(() => CommonText(
+                                text:
+                                    "Hello, ${DashboardController.to.profileDetails.name ?? "..."} ",
+                                fontColor: AppColors.white,
+                                fontSize: AppFontSize.twenty,
+                                fontWeight: FontWeight.w500,
+                              )),
                           const Spacer(),
                           GestureDetector(
                               onTap: () {
@@ -58,7 +62,13 @@ class Home extends StatelessWidget {
                     ),
 
                     // main interest balance card
-                    const MainBalanceCard(),
+                    Obx(() => DashboardController.to.getProfileLoading == true
+                        ? const MainBalanceCard(
+                            isLoading: true,
+                          )
+                        : const MainBalanceCard(
+                            isLoading: false,
+                          )),
                     SizedBox(
                       height: media.height * 0.03,
                     ),
@@ -129,15 +139,29 @@ class Home extends StatelessWidget {
                 ),
 
                 // recent transactions list
-                Padding(
-                  padding: EdgeInsets.only(top: media.height / 1.95),
-                  child: ListView.builder(
-                      itemCount: 15,
-                      shrinkWrap: true,
-                      itemBuilder: (context, int index) {
-                        return const TransactionHistoryCardHome();
-                      }),
-                ),
+                Obx(() => DashboardController.to.getLedgerLoading == true
+                    ? Padding(
+                        padding: EdgeInsets.only(top: media.height / 1.95),
+                        child: const CommonLoading(
+                          size: 100,
+                        ),
+                      )
+                    : DashboardController.to.isLedgerEmpty == true
+                        ? Padding(
+                            padding: EdgeInsets.only(top: media.height / 2),
+                            child: const NoData(msg: "No Recent Transactions"),
+                          )
+                        : Padding(
+                            padding: EdgeInsets.only(top: media.height / 1.95),
+                            child: ListView.builder(
+                                itemCount:
+                                    DashboardController.to.ledgerDetails.length,
+                                shrinkWrap: true,
+                                itemBuilder: (context, int index) {
+                                  return TransactionHistoryCardHome(
+                                      index: index);
+                                }),
+                          )),
               ],
             )),
       ),

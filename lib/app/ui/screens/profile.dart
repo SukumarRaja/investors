@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:investors/app/config/config.dart';
+import '../../controller/dashboard.dart';
+import '../../utility/utility.dart';
 import '../themes/colors.dart';
 import '../themes/font_size.dart';
 import '../widgets/common/common_alert.dart';
@@ -16,6 +18,8 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
+    var i = stringToInt(text: DashboardController.to.profileDetails.investment);
+    var amount = formatAmount(amount: i);
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -41,8 +45,15 @@ class Profile extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: AppColors.white,
                           shape: BoxShape.circle,
-                          image: const DecorationImage(
-                              image: NetworkImage(AppConfig.noImage)),
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                  "${AppConfig.imageUrl}${DashboardController.to.profileDetails.photos}" ==
+                                              "" ||
+                                          // ignore: unnecessary_null_comparison
+                                          "${AppConfig.imageUrl}${DashboardController.to.profileDetails.photos}" ==
+                                              null
+                                      ? AppConfig.noImage
+                                      : "${AppConfig.imageUrl}${DashboardController.to.profileDetails.photos}")),
                           boxShadow: [
                             BoxShadow(
                                 color: AppColors.white.withOpacity(.2),
@@ -57,15 +68,17 @@ class Profile extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           CommonText(
-                            text: "Test User",
+                            text:
+                                "${DashboardController.to.profileDetails.name}",
                             fontColor: AppColors.white,
                             fontSize: AppFontSize.twentyFour,
                             fontWeight: FontWeight.bold,
                           ),
                           CommonText(
-                            text: "1234567890",
+                            text:
+                                "${DashboardController.to.profileDetails.mobile}",
                             fontColor: AppColors.grey,
                             fontSize: AppFontSize.sixteen,
                           ),
@@ -150,14 +163,14 @@ class Profile extends StatelessWidget {
                           end: Alignment.topLeft),
                     ),
                     child: Column(
-                      children: const [
+                      children: [
                         CommonText(
                           text: "Invest Amount",
                           fontSize: AppFontSize.eighteen,
                           fontColor: AppColors.white,
                         ),
                         CommonText(
-                          text: "\u20B9 5,35,363",
+                          text: "\u20B9 $amount",
                           fontSize: AppFontSize.twenty,
                           fontColor: AppColors.white,
                         ),
