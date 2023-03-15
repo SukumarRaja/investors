@@ -17,8 +17,8 @@ class MainBalanceCard extends StatelessWidget {
     var media = MediaQuery.of(context).size;
     var amount = "";
     if (isLoading == false) {
-      var i =
-          stringToInt(text: DashboardController.to.profileDetails.investment);
+      var i = stringToDouble(
+          text: DashboardController.to.profileDetails.investment);
       amount = formatAmount(amount: i);
     }
 
@@ -109,7 +109,30 @@ class MainBalanceCard extends StatelessWidget {
                     // color: AppColors.tertiaryColor,
                     child: Column(
                       children: [
-                        SvgPicture.asset("assets/svgs/mastercard.svg"),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(5),
+                                margin: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  color: AppColors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: isLoading == false
+                                            ? AppColors.white.withOpacity(.2)
+                                            : Colors.transparent,
+                                        spreadRadius: 2,
+                                        blurRadius: 2,
+                                        offset: const Offset(0.4, 0.2))
+                                  ],
+                                ),
+                                child: Image.asset("assets/images/logo.png",height: 40,width: 60,)),
+                            SizedBox(width: media.width*0.04,)
+                          ],
+                        ),
+                        // SvgPicture.asset("assets/svgs/mastercard.svg"),
                         SizedBox(
                           height: media.height * 0.06,
                         ),
@@ -128,7 +151,7 @@ class MainBalanceCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             const CommonText(
-                              text: "* interest balance",
+                              text: "* total balance",
                               fontSize: AppFontSize.twelve,
                             ),
                             SizedBox(

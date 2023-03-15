@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:investors/app/controller/dashboard.dart';
+import 'package:get/get.dart';
+import '../../controller/dashboard.dart';
 import '../../utility/utility.dart';
 import '../themes/colors.dart';
 import '../themes/font_size.dart';
@@ -13,9 +13,15 @@ class TransactionHistoryCardHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var ca = stringToDouble(
+        text: "${DashboardController.to.ledgerDetails[index].amount}");
+    var creditAmount = formatAmount(amount: ca);
+    var d = getIsoToLocalDate(
+        date: "${DashboardController.to.ledgerDetails[index].createdOn}");
+    var da = monthNameToMonthNumber(date: d);
+    var date = months(month: da);
+    print("month is: $date");
     var media = MediaQuery.of(context).size;
-    var s = monthNameToMonthNumber(date: '2030-02-23');
-    print("jkljkl $s");
     return Row(
       children: [
         Container(
@@ -27,17 +33,22 @@ class TransactionHistoryCardHome extends StatelessWidget {
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: AppColors.white,
+                gradient: const LinearGradient(
+                    colors: [AppColors.primary, AppColors.secondary],
+                    begin: Alignment.topRight,
+                    end: Alignment.topLeft),
                 boxShadow: [
                   BoxShadow(
                       color: AppColors.white.withOpacity(.2),
                       spreadRadius: 1,
                       blurRadius: 1,
-                      offset: Offset(0.2, 0.6))
+                      offset: const Offset(0.2, 0.6))
                 ]),
             child: CommonText(
-              text:
-                  "${monthNameToMonthNumber(date: "${DashboardController.to.ledgerDetails[index].withdrawOn}")}-${normalDateToIndividualYear(date: "${DashboardController.to.ledgerDetails[index].withdrawOn}")}",
-              fontColor: AppColors.secondary,
+              text: getIsoToLocalDate(
+                  date:
+                      "${DashboardController.to.ledgerDetails[index].createdOn}"),
+              fontColor: AppColors.white,
               fontWeight: FontWeight.bold,
               fontSize: AppFontSize.sixteen,
               textAlign: TextAlign.center,
@@ -49,24 +60,36 @@ class TransactionHistoryCardHome extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CommonText(
-              text: "May Interest",
+              text:
+                  "${date.capitalize} ${DashboardController.to.ledgerDetails[index].amountType == "Cr" ? "Interest Credited" : "Withdraw"}",
               fontWeight: FontWeight.bold,
-              fontColor: AppColors.white,
+              fontColor: AppColors.secondPrimary,
             ),
-            CommonText(
-              text: "Monthly interest credited",
-              fontSize: AppFontSize.twelve,
-              fontColor: AppColors.grey,
+            Row(
+              children: [
+                const CommonText(
+                  text: "Time : ",
+                  fontSize: AppFontSize.fourteen,
+                  fontColor: AppColors.grey,
+                ),
+                CommonText(
+                  text: getIsoToLocalTime(
+                      date:
+                          "${DashboardController.to.ledgerDetails[index].createdOn}"),
+                  fontSize: AppFontSize.fourteen,
+                  fontColor: AppColors.grey,
+                  fontWeight: FontWeight.w700,
+                ),
+              ],
             ),
           ],
         ),
-        Spacer(),
+        const Spacer(),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             CommonText(
-              text:
-                  "\u20B9 ${DashboardController.to.ledgerDetails[index].amount}",
+              text: "\u20B9 $creditAmount",
               fontWeight: FontWeight.bold,
               fontColor: AppColors.white,
             ),

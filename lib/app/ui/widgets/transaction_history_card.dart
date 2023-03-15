@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../controller/dashboard.dart';
 import '../../utility/utility.dart';
 import '../themes/colors.dart';
@@ -12,6 +13,18 @@ class TransactionHistoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var a =
+        stringToDouble(text: DashboardController.to.profileDetails.investment);
+    var amount = formatAmount(amount: a);
+    var ca = stringToDouble(
+        text: "${DashboardController.to.ledgerDetails[index].amount}");
+    var creditAmount = formatAmount(amount: ca);
+    var d = getIsoToLocalDate(
+        date: "${DashboardController.to.ledgerDetails[index].createdOn}");
+    var da = monthNameToMonthNumber(date: d);
+    var date = months(month: da);
+    debugPrint("month is: $date");
+
     var media = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
@@ -53,36 +66,45 @@ class TransactionHistoryCard extends StatelessWidget {
                       end: Alignment.topLeft),
                 ),
                 child: CommonText(
-                  text:
-                      "${monthNameToMonthNumber(date: "${DashboardController.to.ledgerDetails[index].withdrawOn}")}-${normalDateToIndividualYear(date: "${DashboardController.to.ledgerDetails[index].withdrawOn}")}",
+                  text: getIsoToLocalDate(
+                      date:
+                          "${DashboardController.to.ledgerDetails[index].createdOn}"),
                   fontColor: AppColors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: AppFontSize.sixteen,
                   textAlign: TextAlign.center,
                 )),
-            Positioned(
+            // Positioned(
+            //   bottom: 0,
+            //   child: Row(
+            //     children: [
+            //       CommonText(
+            //         text: "Status : ",
+            //         fontSize: AppFontSize.fourteen,
+            //         fontColor: AppColors.black,
+            //       ),
+            //       CommonText(
+            //         text: DashboardController.to.ledgerDetails[index].status ==
+            //                 "0"
+            //             ? "Pending"
+            //             : "Completed",
+            //         fontSize: AppFontSize.fourteen,
+            //         fontColor:
+            //             DashboardController.to.ledgerDetails[index].status ==
+            //                     "0"
+            //                 ? AppColors.sandal
+            //                 : AppColors.secondary,
+            //         fontWeight: FontWeight.w700,
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            const Positioned(
               bottom: 0,
-              child: Row(
-                children: [
-                  CommonText(
-                    text: "Status : ",
-                    fontSize: AppFontSize.fourteen,
-                    fontColor: AppColors.black,
-                  ),
-                  CommonText(
-                    text: DashboardController.to.ledgerDetails[index].status ==
-                            "0"
-                        ? "Pending"
-                        : "Completed",
-                    fontSize: AppFontSize.fourteen,
-                    fontColor:
-                        DashboardController.to.ledgerDetails[index].status ==
-                                "0"
-                            ? AppColors.sandal
-                            : AppColors.secondary,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ],
+              child: CommonText(
+                text: "Closing Balance:",
+                fontSize: AppFontSize.fourteen,
+                fontColor: AppColors.black,
               ),
             ),
             Positioned(
@@ -91,17 +113,10 @@ class TransactionHistoryCard extends StatelessWidget {
               child: Row(
                 children: [
                   CommonText(
-                    text: "Time : ",
-                    fontSize: AppFontSize.fourteen,
-                    fontColor: AppColors.black,
-                  ),
-                  CommonText(
-                    text:
-                        "${getIsoToLocalFormat(date: "${DashboardController.to.ledgerDetails[index].createdOn}")}",
+                    text: "\u20B9 $amount",
                     fontSize: AppFontSize.fourteen,
                     fontColor: AppColors.secondary,
-                    fontWeight: FontWeight.w700,
-                  ),
+                  )
                 ],
               ),
             ),
@@ -111,16 +126,29 @@ class TransactionHistoryCard extends StatelessWidget {
               left: 80,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   CommonText(
-                    text: "May Interest",
+                    text:
+                        "${date.capitalize} ${DashboardController.to.ledgerDetails[index].amountType == "Cr" ? "Interest Credited" : "Withdraw"}",
                     fontWeight: FontWeight.bold,
                     fontColor: AppColors.black,
                   ),
-                  CommonText(
-                    text: "Monthly interest credited",
-                    fontSize: AppFontSize.twelve,
-                    fontColor: AppColors.grey,
+                  Row(
+                    children: [
+                      const CommonText(
+                        text: "Time : ",
+                        fontSize: AppFontSize.fourteen,
+                        fontColor: AppColors.black,
+                      ),
+                      CommonText(
+                        text: getIsoToLocalTime(
+                            date:
+                                "${DashboardController.to.ledgerDetails[index].createdOn}"),
+                        fontSize: AppFontSize.fourteen,
+                        fontColor: AppColors.secondary,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -133,8 +161,7 @@ class TransactionHistoryCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   CommonText(
-                    text:
-                        "\u20B9 ${DashboardController.to.ledgerDetails[index].amount}",
+                    text: "\u20B9 $creditAmount",
                     fontWeight: FontWeight.bold,
                     isForeground: true,
                     fontSize: AppFontSize.twenty,

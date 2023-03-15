@@ -81,7 +81,7 @@ class Home extends StatelessWidget {
                             context: context,
                             onPressed: () {
                               successAlert(context,
-                                  content: "Under Development",
+                                  content: "Coming soon...",
                                   confirmButtonPressed: () {
                                 Get.back();
                               });
@@ -92,7 +92,7 @@ class Home extends StatelessWidget {
                             icon: Icons.bar_chart,
                             onPressed: () {
                               successAlert(context,
-                                  content: "Under Development",
+                                  content: "Coming soon...",
                                   confirmButtonPressed: () {
                                 Get.back();
                               });
@@ -103,7 +103,7 @@ class Home extends StatelessWidget {
                             icon: Icons.pie_chart,
                             onPressed: () {
                               successAlert(context,
-                                  content: "Under Development",
+                                  content: "Coming soon...",
                                   confirmButtonPressed: () {
                                 Get.back();
                               });
@@ -114,7 +114,7 @@ class Home extends StatelessWidget {
                             icon: Icons.credit_card,
                             onPressed: () {
                               successAlert(context,
-                                  content: "Under Development",
+                                  content: "Coming soon...",
                                   confirmButtonPressed: () {
                                 Get.back();
                               });

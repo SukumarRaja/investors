@@ -29,4 +29,5 @@ class ApiService {
 
   //withdraw
   static const withdrawRequest = AppConfig.baseUrl;
+  static const withdrawRequestList = "${AppConfig.baseUrl}?myRequests=";
 }

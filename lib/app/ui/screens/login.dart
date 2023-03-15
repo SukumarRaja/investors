@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../../controller/auth.dart';
 import '../themes/colors.dart';
 import '../themes/font_size.dart';
+import '../widgets/common/common_alert.dart';
 import '../widgets/common/common_loading.dart';
 import '../widgets/common/common_text.dart';
 import '../widgets/common/common_textform_field.dart';
@@ -83,7 +84,12 @@ class Login extends StatelessWidget {
                   children: [
                     TextButton(
                         onPressed: () {
-                          Get.to(() => const ForgotPassword());
+                          successAlert(context,
+                              content: "Coming soon...",
+                              confirmButtonPressed: () {
+                                Get.back();
+                              });
+                          // Get.to(() => const ForgotPassword());
                         },
                         child: const CommonText(
                           text: "Forgot Password ?",
@@ -135,21 +141,24 @@ class Login extends StatelessWidget {
                           ),
                         ),
                       )),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const CommonText(text: "Don't have an account ?"),
-                    TextButton(
-                        onPressed: () {
-                          Get.to(() => const Register());
-                        },
-                        child: const CommonText(
-                          text: "Register",
-                          fontColor: AppColors.white,
-                        ))
-                  ],
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     const CommonText(text: "Don't have an account ?"),
+                //     TextButton(
+                //         onPressed: () {
+                //           Get.to(() => const Register());
+                //         },
+                //         child: const CommonText(
+                //           text: "Register",
+                //           fontColor: AppColors.white,
+                //         ))
+                //   ],
+                // ),
+                // const Center(child: CommonText(text: "OR",fontColor: AppColors.white,)),
+                SizedBox(
+                  height: media.height * 0.02,
                 ),
-                const Center(child: CommonText(text: "OR")),
                 const Center(
                     child: CommonText(
                   text: "Continue with",

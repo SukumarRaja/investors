@@ -5,7 +5,7 @@ import '../../../controller/main.dart';
 import '../../../controller/profile.dart';
 import '../../themes/colors.dart';
 import '../history.dart';
-import '../profile.dart';
+import '../profile/profile.dart';
 import 'home.dart';
 
 class HomeMain extends StatelessWidget {
@@ -34,12 +34,12 @@ class HomeMain extends StatelessWidget {
                   type: BottomNavigationBarType.fixed,
                   unselectedItemColor: AppColors.grey,
                   elevation: 25,
-                  selectedItemColor: AppColors.secondPrimary,
+                  selectedItemColor: AppColors.white,
                   showUnselectedLabels: false,
                   showSelectedLabels: true,
                   selectedLabelStyle: const TextStyle(fontFamily: "Oswald"),
                   selectedIconTheme:
-                      const IconThemeData(color: AppColors.secondPrimary),
+                      const IconThemeData(color: AppColors.white),
                   unselectedIconTheme:
                       const IconThemeData(color: AppColors.grey),
                   onTap: ProfileController.to.logoutLoading == true

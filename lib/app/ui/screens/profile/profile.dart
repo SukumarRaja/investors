@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:investors/app/config/config.dart';
-import '../../controller/dashboard.dart';
-import '../../controller/profile.dart';
-import '../../utility/utility.dart';
-import '../themes/colors.dart';
-import '../themes/font_size.dart';
-import '../widgets/common/common_alert.dart';
-import '../widgets/common/common_loading.dart';
-import '../widgets/common/common_text.dart';
-import '../widgets/profile/interest_and_withdraw.dart';
-import '../widgets/profile/transactions_count.dart';
-import '../widgets/profile/profile_menu_card.dart';
+import '../../../controller/dashboard.dart';
+import '../../../controller/profile.dart';
+import '../../../utility/utility.dart';
+import '../../themes/colors.dart';
+import '../../themes/font_size.dart';
+import '../../widgets/common/common_alert.dart';
+import '../../widgets/common/common_loading.dart';
+import '../../widgets/common/common_text.dart';
+import '../../widgets/profile/interest_and_withdraw.dart';
+import '../../widgets/profile/transactions_count.dart';
+import '../../widgets/profile/profile_menu_card.dart';
+import '../withdraw_request.dart';
+import 'view.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
@@ -91,8 +93,8 @@ class Profile extends StatelessWidget {
                     // interest amount and withdraw button
                     const InterestAndWithdraw(),
 
-                    // transactions count
-                    const TransactionsCountCard(),
+                    // // transactions count
+                    // const TransactionsCountCard(),
                     SizedBox(
                       height: media.height * 0.03,
                     ),
@@ -100,7 +102,7 @@ class Profile extends StatelessWidget {
                 ),
 
                 Padding(
-                  padding: EdgeInsets.only(top: media.height / 2.5),
+                  padding: EdgeInsets.only(top: media.height / 3.3),
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -109,32 +111,71 @@ class Profile extends StatelessWidget {
                         ProfileMenuCard(
                           name: "Profile",
                           icon: "profile",
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(()=>ProfileView());
+                          },
+                        ),
+                        ProfileMenuCard(
+                          name: "My Requests",
+                          icon: "request",
+                          onPressed: () {
+                            Get.to(()=>WithDrawRequest());
+                          },
                         ),
                         ProfileMenuCard(
                           name: "Change Password",
                           icon: "lock",
-                          onPressed: () {},
+                          onPressed: () {
+                            successAlert(context,
+                                content: "Coming soon...",
+                                confirmButtonPressed: () {
+                                  Get.back();
+                                });
+                          },
                         ),
                         ProfileMenuCard(
                           name: "Reports",
                           icon: "reports",
-                          onPressed: () {},
+                          onPressed: () {
+                            successAlert(context,
+                                content: "Coming soon...",
+                                confirmButtonPressed: () {
+                                  Get.back();
+                                });
+                          },
                         ),
                         ProfileMenuCard(
                           name: "E-Statement",
                           icon: "statement",
-                          onPressed: () {},
+                          onPressed: () {
+                            successAlert(context,
+                                content: "Coming soon...",
+                                confirmButtonPressed: () {
+                                  Get.back();
+                                });
+                          },
                         ),
                         ProfileMenuCard(
                           name: "Settings",
                           icon: "settings",
-                          onPressed: () {},
+                          onPressed: () {
+                            successAlert(context,
+                                content: "Coming soon...",
+                                confirmButtonPressed: () {
+                                  Get.back();
+                                });
+                          },
                         ),
                         ProfileMenuCard(
                           name: "FAQ",
                           icon: "faq",
-                          onPressed: () {},
+                          onPressed: () {
+                            successAlert(context,
+                                content: "Coming soon...",
+                                confirmButtonPressed: () {
+                                  Get.back();
+                                });
+                          },
                         ),
                         logoutButton(context, media)
                       ],
