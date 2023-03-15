@@ -1,4 +1,4 @@
-package com.example.investors;
+package limitless.stack;
 
 import io.flutter.embedding.android.FlutterActivity;
 
