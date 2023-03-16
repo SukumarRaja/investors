@@ -1,4 +1,4 @@
-package limitless.stack;
+package limitless.stake;
 
 import io.flutter.embedding.android.FlutterActivity;
 
