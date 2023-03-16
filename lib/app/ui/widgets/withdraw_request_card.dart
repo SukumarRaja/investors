@@ -87,23 +87,23 @@ class WithDrawRequestsCard extends StatelessWidget {
                     SizedBox(
                       height: media.height * 0.004,
                     ),
-                    Row(
-                      children: [
-                        const CommonText(
-                          text: "Time : ",
-                          fontSize: AppFontSize.fourteen,
-                          fontColor: AppColors.black,
-                        ),
-                        CommonText(
-                          text: getIsoToLocalTime(
-                              date:
-                                  "${WithDrawController.to.withRequestsDetail[index].requestedOn}"),
-                          fontSize: AppFontSize.fourteen,
-                          fontColor: AppColors.secondary,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     const CommonText(
+                    //       text: "Time : ",
+                    //       fontSize: AppFontSize.fourteen,
+                    //       fontColor: AppColors.black,
+                    //     ),
+                    //     CommonText(
+                    //       text: getIsoToLocalTime(
+                    //           date:
+                    //               "${WithDrawController.to.withRequestsDetail[index].requestedOn}"),
+                    //       fontSize: AppFontSize.fourteen,
+                    //       fontColor: AppColors.secondary,
+                    //       fontWeight: FontWeight.w700,
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
                 Spacer(),

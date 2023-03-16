@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../controller/dashboard.dart';
 import '../../utility/utility.dart';
@@ -58,7 +56,7 @@ class MainBalanceCard extends StatelessWidget {
           : Row(
               children: [
                 Expanded(
-                  flex: 2,
+                  flex: 4,
                   child: SizedBox(
                     height: media.height,
                     // color: AppColors.secondaryColor,
@@ -86,9 +84,8 @@ class MainBalanceCard extends StatelessWidget {
                             isForeground: true,
                             fontWeight: FontWeight.w500,
                           ),
-                          SizedBox(
-                            height: media.height * 0.04,
-                          ),
+                          Spacer(),
+
                           CommonText(
                             text: DashboardController.to.profileDetails.name
                                 .toString()
@@ -97,6 +94,7 @@ class MainBalanceCard extends StatelessWidget {
                             letterSpacing: 1,
                             fontColor: AppColors.primary,
                           ),
+                          SizedBox(height: media.height*0.02,)
                         ],
                       ),
                     ),
@@ -133,20 +131,18 @@ class MainBalanceCard extends StatelessWidget {
                           ],
                         ),
                         // SvgPicture.asset("assets/svgs/mastercard.svg"),
-                        SizedBox(
-                          height: media.height * 0.06,
-                        ),
+                      Spacer(),
                         CommonText(
                           text: DashboardController
                               .to.profileDetails.bankAccnumber
                               .toString()
                               .replaceAllMapped(RegExp(r".{4}"),
                                   (match) => "${match.group(0)} "),
-                          fontColor: AppColors.secondary,
+                          fontColor: AppColors.white.withOpacity(.7),
                         ),
-                        SizedBox(
-                          height: media.height * 0.02,
-                        ),
+                        // SizedBox(
+                        //   height: media.height * 0.02,
+                        // ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [

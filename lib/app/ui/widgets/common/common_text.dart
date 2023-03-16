@@ -13,7 +13,8 @@ class CommonText extends StatelessWidget {
       this.letterSpacing,
       this.textAlign,
       this.foreground,
-      this.isForeground})
+      this.isForeground,
+      this.fontFamily})
       : super(key: key);
   final String text;
   final double fontSize;
@@ -23,6 +24,7 @@ class CommonText extends StatelessWidget {
   final TextAlign? textAlign;
   final Paint? foreground;
   final bool? isForeground;
+  final String? fontFamily;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class CommonText extends StatelessWidget {
           fontSize: media.width * fontSize,
           fontWeight: fontWeight,
           color: isForeground == true ? null : fontColor,
-          fontFamily: "Oswald",
+          fontFamily: fontFamily ?? "Oswald",
           foreground: foreground,
           letterSpacing: letterSpacing),
     );

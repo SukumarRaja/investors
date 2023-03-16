@@ -167,7 +167,7 @@ class WithDrawRequest extends StatelessWidget {
                       )
                               : Padding(
                                   padding:
-                                      EdgeInsets.only(top: media.height / 6.5),
+                                      EdgeInsets.only(top: media.height / 6),
                                   child: ListView.builder(
                                       itemCount: WithDrawController
                                           .to.withRequestsDetail.length,

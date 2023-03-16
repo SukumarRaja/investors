@@ -51,6 +51,7 @@ class ProfileMenuCard extends StatelessWidget {
               text: name,
               fontColor: AppColors.white,
               fontSize: AppFontSize.twenty,
+              fontFamily: "GtAmerica",
             ),
             const Spacer(),
             Container(
@@ -67,7 +68,7 @@ class ProfileMenuCard extends StatelessWidget {
                       offset: const Offset(0.2, 0.6)),
                 ],
               ),
-              child: const Icon(Icons.keyboard_arrow_right),
+              child: const Icon(Icons.keyboard_arrow_right,color: AppColors.white,),
             ),
           ],
         ),

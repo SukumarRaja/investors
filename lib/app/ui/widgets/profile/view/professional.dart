@@ -22,6 +22,7 @@ class ProfessionalInfoCard extends StatelessWidget {
             fontSize: AppFontSize.twenty,
             fontWeight: FontWeight.bold,
             letterSpacing: 1,
+            fontFamily: "GtAmerica-Standard-Black",
           ),
         ),
         GestureDetector(

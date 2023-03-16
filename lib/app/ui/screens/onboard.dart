@@ -176,11 +176,11 @@ class _OnBoardingScreenState extends State<OnBoarding> {
                         ),
                       )
                     : const SizedBox(),
-                currentPage == numPages - 1
-                    ? const SizedBox(
-                        height: 25,
-                      )
-                    : const SizedBox(),
+                // currentPage == numPages - 1
+                //     ? const SizedBox(
+                //         height: 25,
+                //       )
+                //     : const SizedBox(),
                 currentPage == numPages - 1
                     ? GestureDetector(
                         onTap: () {

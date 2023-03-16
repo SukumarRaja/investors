@@ -71,6 +71,7 @@ class TransactionHistoryCardHome extends StatelessWidget {
                   text: "Time : ",
                   fontSize: AppFontSize.fourteen,
                   fontColor: AppColors.grey,
+                  fontFamily: "GtAmerica-Thin",
                 ),
                 CommonText(
                   text: getIsoToLocalTime(
@@ -78,6 +79,7 @@ class TransactionHistoryCardHome extends StatelessWidget {
                           "${DashboardController.to.ledgerDetails[index].createdOn}"),
                   fontSize: AppFontSize.fourteen,
                   fontColor: AppColors.grey,
+                  fontFamily: "GtAmerica-Thin",
                   fontWeight: FontWeight.w700,
                 ),
               ],
@@ -92,6 +94,7 @@ class TransactionHistoryCardHome extends StatelessWidget {
               text: "\u20B9 $creditAmount",
               fontWeight: FontWeight.bold,
               fontColor: AppColors.white,
+              fontFamily: "GtAmerica-Standard-Black",
             ),
             CommonText(
               text:
@@ -103,6 +106,7 @@ class TransactionHistoryCardHome extends StatelessWidget {
                   DashboardController.to.ledgerDetails[index].amountType == "Cr"
                       ? AppColors.green
                       : AppColors.red,
+              fontFamily: "GtAmerica-Thin",
             ),
           ],
         ),

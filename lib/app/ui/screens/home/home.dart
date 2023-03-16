@@ -30,138 +30,163 @@ class Home extends StatelessWidget {
             ),
             child: Stack(
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // user name
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: media.width * 0.04,
-                          vertical: media.height * 0.02),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // user name
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: media.width * 0.04,
+                            vertical: media.height * 0.02),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Obx(() => CommonText(
+                                  text:
+                                      "Hello, ${DashboardController.to.profileDetails.name ?? "..."} ",
+                                  fontColor: AppColors.white,
+                                  fontSize: AppFontSize.twenty,
+                                  fontWeight: FontWeight.w500,
+                                )),
+                            const Spacer(),
+                            GestureDetector(
+                                onTap: () {
+                                  // Get.to(() => const Notifications());
+                                },
+                                child: const Icon(
+                                  Icons.notifications_none,
+                                  color: AppColors.white,
+                                ))
+                          ],
+                        ),
+                      ),
+
+                      // main interest balance card
+                      Obx(() => DashboardController.to.getProfileLoading == true
+                          ? const MainBalanceCard(
+                              isLoading: true,
+                            )
+                          : const MainBalanceCard(
+                              isLoading: false,
+                            )),
+                      SizedBox(
+                        height: media.height * 0.03,
+                      ),
+
+                      // four menus
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Obx(() => CommonText(
-                                text:
-                                    "Hello, ${DashboardController.to.profileDetails.name ?? "..."} ",
-                                fontColor: AppColors.white,
-                                fontSize: AppFontSize.twenty,
-                                fontWeight: FontWeight.w500,
-                              )),
-                          const Spacer(),
-                          GestureDetector(
-                              onTap: () {
-                                // Get.to(() => const Notifications());
-                              },
-                              child: const Icon(
-                                Icons.notifications_none,
-                                color: AppColors.white,
-                              ))
+                          buildContainer(
+                              context: context,
+                              onPressed: () {
+                                successAlert(context,
+                                    content: "Coming soon...",
+                                    confirmButtonPressed: () {
+                                  Get.back();
+                                });
+                              }),
+                          buildWhiteContainer(
+                              context: context,
+                              title: "Analytics",
+                              icon: Icons.bar_chart,
+                              onPressed: () {
+                                successAlert(context,
+                                    content: "Coming soon...",
+                                    confirmButtonPressed: () {
+                                  Get.back();
+                                });
+                              }),
+                          buildWhiteContainer(
+                              context: context,
+                              title: "Chart",
+                              icon: Icons.pie_chart,
+                              onPressed: () {
+                                successAlert(context,
+                                    content: "Coming soon...",
+                                    confirmButtonPressed: () {
+                                  Get.back();
+                                });
+                              }),
+                          // buildWhiteContainer(
+                          //     context: context,
+                          //     title: "Add Card",
+                          //     icon: Icons.credit_card,
+                          //     onPressed: () {
+                          //       successAlert(context,
+                          //           content: "Coming soon...",
+                          //           confirmButtonPressed: () {
+                          //         Get.back();
+                          //       });
+                          //     }),
                         ],
                       ),
-                    ),
-
-                    // main interest balance card
-                    Obx(() => DashboardController.to.getProfileLoading == true
-                        ? const MainBalanceCard(
-                            isLoading: true,
-                          )
-                        : const MainBalanceCard(
-                            isLoading: false,
-                          )),
-                    SizedBox(
-                      height: media.height * 0.03,
-                    ),
-
-                    // four menus
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        buildContainer(
-                            context: context,
-                            onPressed: () {
-                              successAlert(context,
-                                  content: "Coming soon...",
-                                  confirmButtonPressed: () {
-                                Get.back();
-                              });
-                            }),
-                        buildWhiteContainer(
-                            context: context,
-                            title: "Analytics",
-                            icon: Icons.bar_chart,
-                            onPressed: () {
-                              successAlert(context,
-                                  content: "Coming soon...",
-                                  confirmButtonPressed: () {
-                                Get.back();
-                              });
-                            }),
-                        buildWhiteContainer(
-                            context: context,
-                            title: "Chart",
-                            icon: Icons.pie_chart,
-                            onPressed: () {
-                              successAlert(context,
-                                  content: "Coming soon...",
-                                  confirmButtonPressed: () {
-                                Get.back();
-                              });
-                            }),
-                        buildWhiteContainer(
-                            context: context,
-                            title: "Add Card",
-                            icon: Icons.credit_card,
-                            onPressed: () {
-                              successAlert(context,
-                                  content: "Coming soon...",
-                                  confirmButtonPressed: () {
-                                Get.back();
-                              });
-                            }),
-                      ],
-                    ),
-                    SizedBox(
-                      height: media.height * 0.03,
-                    ),
-
-                    // recent transactions text
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15.0),
-                      child: CommonText(
-                        text: "Recent Transactions",
-                        fontColor: AppColors.white,
-                        fontSize: AppFontSize.eighteen,
-                        fontWeight: FontWeight.bold,
+                      SizedBox(
+                        height: media.height * 0.03,
                       ),
-                    ),
-                  ],
-                ),
 
-                // recent transactions list
-                Obx(() => DashboardController.to.getLedgerLoading == true
-                    ? Padding(
+                      // recent transactions text
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 15.0),
+                        child: CommonText(
+                          text: "Recent Transactions",
+                          fontColor: AppColors.white,
+                          fontSize: AppFontSize.eighteen,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+
+                      Obx(() => DashboardController.to.getLedgerLoading == true
+                          ? Padding(
                         padding: EdgeInsets.only(top: media.height / 1.95),
                         child: const CommonLoading(
                           size: 100,
                         ),
                       )
-                    : DashboardController.to.isLedgerEmpty == true
-                        ? Padding(
-                            padding: EdgeInsets.only(top: media.height / 2),
-                            child: const NoData(msg: "No Recent Transactions"),
-                          )
-                        : Padding(
-                            padding: EdgeInsets.only(top: media.height / 1.95),
-                            child: ListView.builder(
-                                itemCount:
-                                    DashboardController.to.ledgerDetails.length,
-                                shrinkWrap: true,
-                                itemBuilder: (context, int index) {
-                                  return TransactionHistoryCardHome(
-                                      index: index);
-                                }),
-                          )),
+                          : DashboardController.to.isLedgerEmpty == true
+                          ? Padding(
+                        padding: EdgeInsets.only(top: media.height / 2),
+                        child: const NoData(msg: "No Recent Transactions"),
+                      )
+                          : ListView.builder(
+                              itemCount:
+                              DashboardController.to.ledgerDetails.length,
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, int index) {
+                                return TransactionHistoryCardHome(
+                                    index: index);
+                              })),
+
+                    ],
+                  ),
+                ),
+
+                // recent transactions list
+                // Obx(() => DashboardController.to.getLedgerLoading == true
+                //     ? Padding(
+                //         padding: EdgeInsets.only(top: media.height / 1.95),
+                //         child: const CommonLoading(
+                //           size: 100,
+                //         ),
+                //       )
+                //     : DashboardController.to.isLedgerEmpty == true
+                //         ? Padding(
+                //             padding: EdgeInsets.only(top: media.height / 2),
+                //             child: const NoData(msg: "No Recent Transactions"),
+                //           )
+                //         : Padding(
+                //             padding: EdgeInsets.only(top: media.height / 1.95),
+                //             child: ListView.builder(
+                //                 itemCount:
+                //                     DashboardController.to.ledgerDetails.length,
+                //                 shrinkWrap: true,
+                //                 itemBuilder: (context, int index) {
+                //                   return TransactionHistoryCardHome(
+                //                       index: index);
+                //                 }),
+                //           )),
               ],
             )),
       ),

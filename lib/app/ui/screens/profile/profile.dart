@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:investors/app/config/config.dart';
 import '../../../controller/dashboard.dart';
@@ -11,7 +10,6 @@ import '../../widgets/common/common_alert.dart';
 import '../../widgets/common/common_loading.dart';
 import '../../widgets/common/common_text.dart';
 import '../../widgets/profile/interest_and_withdraw.dart';
-import '../../widgets/profile/transactions_count.dart';
 import '../../widgets/profile/profile_menu_card.dart';
 import '../withdraw_request.dart';
 import 'view.dart';
@@ -38,150 +36,148 @@ class Profile extends StatelessWidget {
             ),
             child: Stack(
               children: [
-                Column(
-                  children: [
-                    // user photo
-                    Container(
-                      height: 90,
-                      width: 90,
-                      padding: const EdgeInsets.all(10),
-                      margin: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                          color: AppColors.white,
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                  "${AppConfig.imageUrl}${DashboardController.to.profileDetails.photos}" ==
-                                              "" ||
-                                          // ignore: unnecessary_null_comparison
-                                          "${AppConfig.imageUrl}${DashboardController.to.profileDetails.photos}" ==
-                                              null
-                                      ? AppConfig.noImage
-                                      : "${AppConfig.imageUrl}${DashboardController.to.profileDetails.photos}")),
-                          boxShadow: [
-                            BoxShadow(
-                                color: AppColors.white.withOpacity(.2),
-                                spreadRadius: 1,
-                                blurRadius: 1,
-                                offset: const Offset(0.2, 0.6))
-                          ]),
-                    ),
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      // user photo
+                      Container(
+                        height: 90,
+                        width: 90,
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                            color: AppColors.white,
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    "${AppConfig.imageUrl}${DashboardController.to.profileDetails.photos}" ==
+                                                "" ||
+                                            // ignore: unnecessary_null_comparison
+                                            "${AppConfig.imageUrl}${DashboardController.to.profileDetails.photos}" ==
+                                                null
+                                        ? AppConfig.noImage
+                                        : "${AppConfig.imageUrl}${DashboardController.to.profileDetails.photos}")),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: AppColors.white.withOpacity(.2),
+                                  spreadRadius: 1,
+                                  blurRadius: 1,
+                                  offset: const Offset(0.2, 0.6))
+                            ]),
+                      ),
 
-                    //user name and number
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      //user name and number
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CommonText(
+                              text:
+                                  "${DashboardController.to.profileDetails.name}",
+                              fontColor: AppColors.white,
+                              fontSize: AppFontSize.twentyFour,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            CommonText(
+                              text:
+                                  "${DashboardController.to.profileDetails.mobile}",
+                              fontColor: AppColors.grey,
+                              fontSize: AppFontSize.sixteen,
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // interest amount and withdraw button
+                      const InterestAndWithdraw(),
+
+                      // // transactions count
+                      // const TransactionsCountCard(),
+                      SizedBox(
+                        height: media.height * 0.02,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          CommonText(
-                            text:
-                                "${DashboardController.to.profileDetails.name}",
-                            fontColor: AppColors.white,
-                            fontSize: AppFontSize.twentyFour,
-                            fontWeight: FontWeight.bold,
+                          // menus
+                          ProfileMenuCard(
+                            name: "Profile",
+                            icon: "profile",
+                            onPressed: () {
+                              Get.to(()=>ProfileView());
+                            },
                           ),
-                          CommonText(
-                            text:
-                                "${DashboardController.to.profileDetails.mobile}",
-                            fontColor: AppColors.grey,
-                            fontSize: AppFontSize.sixteen,
+                          ProfileMenuCard(
+                            name: "My Requests",
+                            icon: "request",
+                            onPressed: () {
+                              Get.to(()=>WithDrawRequest());
+                            },
                           ),
+                          ProfileMenuCard(
+                            name: "Change Password",
+                            icon: "lock",
+                            onPressed: () {
+                              successAlert(context,
+                                  content: "Coming soon...",
+                                  confirmButtonPressed: () {
+                                    Get.back();
+                                  });
+                            },
+                          ),
+                          ProfileMenuCard(
+                            name: "Reports",
+                            icon: "reports",
+                            onPressed: () {
+                              successAlert(context,
+                                  content: "Coming soon...",
+                                  confirmButtonPressed: () {
+                                    Get.back();
+                                  });
+                            },
+                          ),
+                          ProfileMenuCard(
+                            name: "E-Statement",
+                            icon: "statement",
+                            onPressed: () {
+                              successAlert(context,
+                                  content: "Coming soon...",
+                                  confirmButtonPressed: () {
+                                    Get.back();
+                                  });
+                            },
+                          ),
+                          ProfileMenuCard(
+                            name: "Settings",
+                            icon: "settings",
+                            onPressed: () {
+                              successAlert(context,
+                                  content: "Coming soon...",
+                                  confirmButtonPressed: () {
+                                    Get.back();
+                                  });
+                            },
+                          ),
+                          ProfileMenuCard(
+                            name: "FAQ",
+                            icon: "faq",
+                            onPressed: () {
+                              successAlert(context,
+                                  content: "Coming soon...",
+                                  confirmButtonPressed: () {
+                                    Get.back();
+                                  });
+                            },
+                          ),
+                          logoutButton(context, media)
                         ],
                       ),
-                    ),
-
-                    // interest amount and withdraw button
-                    const InterestAndWithdraw(),
-
-                    // // transactions count
-                    // const TransactionsCountCard(),
-                    SizedBox(
-                      height: media.height * 0.03,
-                    ),
-                  ],
-                ),
-
-                Padding(
-                  padding: EdgeInsets.only(top: media.height / 3.3),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        // menus
-                        ProfileMenuCard(
-                          name: "Profile",
-                          icon: "profile",
-                          onPressed: () {
-                            Get.to(()=>ProfileView());
-                          },
-                        ),
-                        ProfileMenuCard(
-                          name: "My Requests",
-                          icon: "request",
-                          onPressed: () {
-                            Get.to(()=>WithDrawRequest());
-                          },
-                        ),
-                        ProfileMenuCard(
-                          name: "Change Password",
-                          icon: "lock",
-                          onPressed: () {
-                            successAlert(context,
-                                content: "Coming soon...",
-                                confirmButtonPressed: () {
-                                  Get.back();
-                                });
-                          },
-                        ),
-                        ProfileMenuCard(
-                          name: "Reports",
-                          icon: "reports",
-                          onPressed: () {
-                            successAlert(context,
-                                content: "Coming soon...",
-                                confirmButtonPressed: () {
-                                  Get.back();
-                                });
-                          },
-                        ),
-                        ProfileMenuCard(
-                          name: "E-Statement",
-                          icon: "statement",
-                          onPressed: () {
-                            successAlert(context,
-                                content: "Coming soon...",
-                                confirmButtonPressed: () {
-                                  Get.back();
-                                });
-                          },
-                        ),
-                        ProfileMenuCard(
-                          name: "Settings",
-                          icon: "settings",
-                          onPressed: () {
-                            successAlert(context,
-                                content: "Coming soon...",
-                                confirmButtonPressed: () {
-                                  Get.back();
-                                });
-                          },
-                        ),
-                        ProfileMenuCard(
-                          name: "FAQ",
-                          icon: "faq",
-                          onPressed: () {
-                            successAlert(context,
-                                content: "Coming soon...",
-                                confirmButtonPressed: () {
-                                  Get.back();
-                                });
-                          },
-                        ),
-                        logoutButton(context, media)
-                      ],
-                    ),
+                    ],
                   ),
                 ),
+
+
 
                 // invest amount
                 Positioned(

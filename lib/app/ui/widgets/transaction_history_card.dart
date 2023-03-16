@@ -43,145 +43,117 @@ class TransactionHistoryCard extends StatelessWidget {
                 offset: const Offset(0.4, 0.6)),
           ],
         ),
-        child: Stack(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-                alignment: Alignment.center,
-                height: 60,
-                width: 60,
-                margin: const EdgeInsets.only(right: 5, bottom: 25, top: 2),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.white,
-                  boxShadow: [
-                    BoxShadow(
-                        color: AppColors.green.withOpacity(.4),
-                        spreadRadius: 1,
-                        blurRadius: 1,
-                        offset: const Offset(0.2, 0.6))
+            Row(
+              children: [
+                Container(
+                    alignment: Alignment.center,
+                    height: 60,
+                    width: 60,
+                    margin: const EdgeInsets.only(right: 10),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            color: AppColors.green.withOpacity(.4),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: const Offset(0.2, 0.6))
+                      ],
+                      gradient: const LinearGradient(
+                          colors: [AppColors.primary, AppColors.secondary],
+                          begin: Alignment.topRight,
+                          end: Alignment.topLeft),
+                    ),
+                    child: CommonText(
+                      text: getIsoToLocalDate(
+                          date:
+                              "${DashboardController.to.ledgerDetails[index].createdOn}"),
+                      fontColor: AppColors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: AppFontSize.sixteen,
+                      textAlign: TextAlign.center,
+                    )),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CommonText(
+                      text:
+                          "${date.capitalize} ${DashboardController.to.ledgerDetails[index].amountType == "Cr" ? "Interest Credited" : "Withdraw"}",
+                      fontWeight: FontWeight.bold,
+                      fontColor: AppColors.black,
+                    ),
+                    Row(
+                      children: [
+                        const CommonText(
+                          text: "Time : ",
+                          fontSize: AppFontSize.fourteen,
+                          fontColor: AppColors.black,
+                          fontFamily: "GtAmerica-Thin",
+                        ),
+                        CommonText(
+                          text: getIsoToLocalTime(
+                              date:
+                                  "${DashboardController.to.ledgerDetails[index].createdOn}"),
+                          fontSize: AppFontSize.fourteen,
+                          fontColor: AppColors.black,
+                          // fontWeight: FontWeight.w700,
+                          fontFamily: "GtAmerica-Thin",
+                        ),
+                      ],
+                    ),
                   ],
-                  gradient: const LinearGradient(
-                      colors: [AppColors.primary, AppColors.secondary],
-                      begin: Alignment.topRight,
-                      end: Alignment.topLeft),
                 ),
-                child: CommonText(
-                  text: getIsoToLocalDate(
-                      date:
-                          "${DashboardController.to.ledgerDetails[index].createdOn}"),
-                  fontColor: AppColors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: AppFontSize.sixteen,
-                  textAlign: TextAlign.center,
-                )),
-            // Positioned(
-            //   bottom: 0,
-            //   child: Row(
-            //     children: [
-            //       CommonText(
-            //         text: "Status : ",
-            //         fontSize: AppFontSize.fourteen,
-            //         fontColor: AppColors.black,
-            //       ),
-            //       CommonText(
-            //         text: DashboardController.to.ledgerDetails[index].status ==
-            //                 "0"
-            //             ? "Pending"
-            //             : "Completed",
-            //         fontSize: AppFontSize.fourteen,
-            //         fontColor:
-            //             DashboardController.to.ledgerDetails[index].status ==
-            //                     "0"
-            //                 ? AppColors.sandal
-            //                 : AppColors.secondary,
-            //         fontWeight: FontWeight.w700,
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            const Positioned(
-              bottom: 0,
-              child: CommonText(
-                text: "Closing Balance:",
-                fontSize: AppFontSize.fourteen,
-                fontColor: AppColors.black,
-              ),
+                const Spacer(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    CommonText(
+                      text: "\u20B9 $creditAmount",
+                      fontWeight: FontWeight.bold,
+                      isForeground: true,
+                      fontSize: AppFontSize.eighteen,
+                      foreground: Paint()..shader = historyAmountGradient,
+                      fontFamily: "GtAmerica-Standard-Black",
+                    ),
+                    CommonText(
+                      text: DashboardController
+                                  .to.ledgerDetails[index].amountType ==
+                              "Cr"
+                          ? "Credited"
+                          : "Debited",
+                      fontSize: AppFontSize.fourteen,
+                      fontColor: DashboardController
+                                  .to.ledgerDetails[index].amountType ==
+                              "Cr"
+                          ? AppColors.green
+                          : AppColors.red,
+                    ),
+                  ],
+                ),
+              ],
             ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: Row(
-                children: [
-                  CommonText(
-                    text: "\u20B9 $amount",
-                    fontSize: AppFontSize.fourteen,
-                    fontColor: AppColors.secondary,
-                  )
-                ],
-              ),
+            SizedBox(
+              height: media.height * 0.008,
             ),
-            Positioned(
-              top: 18,
-              bottom: 0,
-              left: 80,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CommonText(
-                    text:
-                        "${date.capitalize} ${DashboardController.to.ledgerDetails[index].amountType == "Cr" ? "Interest Credited" : "Withdraw"}",
-                    fontWeight: FontWeight.bold,
-                    fontColor: AppColors.black,
-                  ),
-                  Row(
-                    children: [
-                      const CommonText(
-                        text: "Time : ",
-                        fontSize: AppFontSize.fourteen,
-                        fontColor: AppColors.black,
-                      ),
-                      CommonText(
-                        text: getIsoToLocalTime(
-                            date:
-                                "${DashboardController.to.ledgerDetails[index].createdOn}"),
-                        fontSize: AppFontSize.fourteen,
-                        fontColor: AppColors.secondary,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              top: 18,
-              bottom: 0,
-              right: 0,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  CommonText(
-                    text: "\u20B9 $creditAmount",
-                    fontWeight: FontWeight.bold,
-                    isForeground: true,
-                    fontSize: AppFontSize.twenty,
-                    foreground: Paint()..shader = historyAmountGradient,
-                  ),
-                  CommonText(
-                    text: DashboardController
-                                .to.ledgerDetails[index].amountType ==
-                            "Cr"
-                        ? "Credited"
-                        : "Debited",
-                    fontSize: AppFontSize.fourteen,
-                    fontColor: DashboardController
-                                .to.ledgerDetails[index].amountType ==
-                            "Cr"
-                        ? AppColors.green
-                        : AppColors.red,
-                  ),
-                ],
-              ),
+            Row(
+              children: [
+                const CommonText(
+                  text: "Closing Balance:",
+                  fontSize: AppFontSize.fourteen,
+                  fontColor: AppColors.black,
+                ),
+                const Spacer(),
+                CommonText(
+                  text: "\u20B9 $amount",
+                  fontSize: AppFontSize.fourteen,
+                  fontColor: AppColors.secondary,
+                  fontFamily: "GtAmerica-Standard-Black",
+                ),
+              ],
             ),
           ],
         ),

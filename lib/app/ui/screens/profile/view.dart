@@ -56,6 +56,7 @@ class ProfileView extends StatelessWidget {
                   const PersonalInfoCard(),
                   const BankInfoCard(),
                   const ProfessionalInfoCard(),
+                  SizedBox(height: 30,)
                 ],
               ),
             ),

@@ -92,5 +92,15 @@ flutter:
     - family: Poppins
       fonts:
         - asset: assets/fonts/poppins/Poppins-Regular.ttf
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+    - family: GtAmerica
+      fonts:
+        - asset: assets/fonts/gt_america/Italic-Trial.otf
+    - family: GtAmerica-Light
+      fonts:
+        - asset: assets/fonts/gt_america/Ultra-Light-Trial.otf
+    - family: GtAmerica-Thin
+      fonts:
+        - asset: assets/fonts/gt_america/Compressed-Thin-Trial.otf
+    - family: GtAmerica-Standard-Black
+      fonts:
+        - asset: assets/fonts/gt_america/Standard-Black-Trial.otf
