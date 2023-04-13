@@ -25,7 +25,7 @@ class AmountAndInterestCard extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          flex: 3,
+          flex: 4,
           child: GestureDetector(
             onTap: () {},
             child: Container(

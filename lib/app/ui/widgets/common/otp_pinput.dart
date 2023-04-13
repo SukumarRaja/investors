@@ -18,7 +18,7 @@ class OtpInput extends StatelessWidget {
         keyboardType: TextInputType.number,
         controller: controller,
         maxLength: 1,
-        style: const TextStyle(color: AppColors.secondPrimary),
+        style: const TextStyle(color: AppColors.secondPrimary,fontWeight: FontWeight.bold),
         cursorColor: AppColors.white,
         decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(

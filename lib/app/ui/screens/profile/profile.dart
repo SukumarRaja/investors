@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:investors/app/config/config.dart';
+import 'package:investors/app/ui/screens/estatement.dart';
+import 'package:investors/app/ui/screens/faq.dart';
+import 'package:investors/app/ui/screens/language.dart';
 import '../../../controller/dashboard.dart';
 import '../../../controller/profile.dart';
 import '../../../utility/utility.dart';
@@ -11,6 +14,7 @@ import '../../widgets/common/common_loading.dart';
 import '../../widgets/common/common_text.dart';
 import '../../widgets/profile/interest_and_withdraw.dart';
 import '../../widgets/profile/profile_menu_card.dart';
+import '../change_passwrod.dart';
 import '../withdraw_request.dart';
 import 'view.dart';
 
@@ -105,69 +109,105 @@ class Profile extends StatelessWidget {
                             name: "Profile",
                             icon: "profile",
                             onPressed: () {
-                              Get.to(()=>ProfileView());
+                              Get.to(() => ProfileView());
                             },
                           ),
                           ProfileMenuCard(
                             name: "My Requests",
                             icon: "request",
                             onPressed: () {
-                              Get.to(()=>WithDrawRequest());
+                              Get.to(() => WithDrawRequest());
                             },
                           ),
                           ProfileMenuCard(
                             name: "Change Password",
                             icon: "lock",
                             onPressed: () {
-                              successAlert(context,
-                                  content: "Coming soon...",
-                                  confirmButtonPressed: () {
-                                    Get.back();
-                                  });
+                              Get.to(()=>ChangePassword());
+                              // successAlert(context, content: "Coming soon...",
+                              //     confirmButtonPressed: () {
+                              //   Get.back();
+                              // });
                             },
                           ),
                           ProfileMenuCard(
                             name: "Reports",
                             icon: "reports",
                             onPressed: () {
-                              successAlert(context,
-                                  content: "Coming soon...",
+                              successAlert(context, content: "Coming soon...",
                                   confirmButtonPressed: () {
-                                    Get.back();
-                                  });
+                                Get.back();
+                              });
                             },
                           ),
                           ProfileMenuCard(
                             name: "E-Statement",
                             icon: "statement",
                             onPressed: () {
-                              successAlert(context,
-                                  content: "Coming soon...",
-                                  confirmButtonPressed: () {
-                                    Get.back();
-                                  });
+                              Get.to(()=>Estatement());
+                              // successAlert(context, content: "Coming soon...",
+                              //     confirmButtonPressed: () {
+                              //   Get.back();
+                              // });
                             },
                           ),
+                          // ProfileMenuCard(
+                          //   name: "Currency",
+                          //   icon: "currency",
+                          //   onPressed: () {
+                          //     successAlert(context, content: "Coming soon...",
+                          //         confirmButtonPressed: () {
+                          //       Get.back();
+                          //     });
+                          //   },
+                          // ),
                           ProfileMenuCard(
-                            name: "Settings",
-                            icon: "settings",
+                            name: "Language",
+                            icon: "language",
                             onPressed: () {
-                              successAlert(context,
-                                  content: "Coming soon...",
-                                  confirmButtonPressed: () {
-                                    Get.back();
-                                  });
+                              Get.to(()=>Lang());
+                              // successAlert(context, content: "Coming soon...",
+                              //     confirmButtonPressed: () {
+                              //   Get.back();
+                              // });
                             },
                           ),
+
                           ProfileMenuCard(
                             name: "FAQ",
                             icon: "faq",
                             onPressed: () {
-                              successAlert(context,
-                                  content: "Coming soon...",
-                                  confirmButtonPressed: () {
-                                    Get.back();
-                                  });
+                              Get.to(() => Faq());
+                              // successAlert(context, content: "Coming soon...",
+                              //     confirmButtonPressed: () {
+                              //   Get.back();
+                              // });
+                            },
+                          ),
+                          ProfileMenuCard(
+                            name: "Privacy Policy",
+                            icon: "privacy",
+                            onPressed: () {
+                              openBrowser(
+                                  url:
+                                      "https://pub.dev/packages/url_launcher/example");
+                              // successAlert(context, content: "Coming soon...",
+                              //     confirmButtonPressed: () {
+                              //   Get.back();
+                              // });
+                            },
+                          ),
+                          ProfileMenuCard(
+                            name: "Terms & Conditions",
+                            icon: "terms",
+                            onPressed: () {
+                              openBrowser(
+                                  url:
+                                      "https://pub.dev/packages/url_launcher/example");
+                              // successAlert(context, content: "Coming soon...",
+                              //     confirmButtonPressed: () {
+                              //   Get.back();
+                              // });
                             },
                           ),
                           logoutButton(context, media)
@@ -176,8 +216,6 @@ class Profile extends StatelessWidget {
                     ],
                   ),
                 ),
-
-
 
                 // invest amount
                 Positioned(

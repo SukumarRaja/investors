@@ -20,4 +20,28 @@ class MainController extends GetxController {
   set isSelectIcon(value) {
     _isSelectIcon.value = value;
   }
+
+  final _languageIndex = 10.obs;
+
+  get languageIndex => _languageIndex.value;
+
+  set languageIndex(value) {
+    _languageIndex.value = value;
+  }
+
+  final _monthIndex = "".obs;
+
+  get monthIndex => _monthIndex.value;
+
+  set monthIndex(value) {
+    _monthIndex.value = value;
+  }
+
+  final _yearIndex = "".obs;
+
+  get yearIndex => _yearIndex.value;
+
+  set yearIndex(value) {
+    _yearIndex.value = value;
+  }
 }

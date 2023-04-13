@@ -45,6 +45,13 @@ dependencies:
   intl: ^0.18.0
   shimmer: ^2.0.0
   flutter_automation: ^2.0.0
+  percent_indicator: ^4.2.3
+  fl_chart: ^0.61.0
+  ionicons: ^0.2.2
+  url_launcher: ^6.1.10
+
+
+
 
 dev_dependencies:
   flutter_test:

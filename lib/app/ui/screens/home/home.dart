@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investors/app/ui/screens/analytics.dart';
+import 'package:investors/app/ui/screens/piechart.dart';
 import 'package:investors/app/ui/widgets/common/common_loading.dart';
 import 'package:investors/app/ui/widgets/common/no-data.dart';
 import 'package:shimmer/shimmer.dart';
@@ -92,22 +94,24 @@ class Home extends StatelessWidget {
                               title: "Analytics",
                               icon: Icons.bar_chart,
                               onPressed: () {
-                                successAlert(context,
-                                    content: "Coming soon...",
-                                    confirmButtonPressed: () {
-                                  Get.back();
-                                });
+                                Get.to(()=> Analytics());
+                                // successAlert(context,
+                                //     content: "Coming soon...",
+                                //     confirmButtonPressed: () {
+                                //   Get.back();
+                                // });
                               }),
                           buildWhiteContainer(
                               context: context,
                               title: "Chart",
                               icon: Icons.pie_chart,
                               onPressed: () {
-                                successAlert(context,
-                                    content: "Coming soon...",
-                                    confirmButtonPressed: () {
-                                  Get.back();
-                                });
+                                Get.to(()=> Pie());
+                                // successAlert(context,
+                                //     content: "Coming soon...",
+                                //     confirmButtonPressed: () {
+                                //   Get.back();
+                                // });
                               }),
                           // buildWhiteContainer(
                           //     context: context,

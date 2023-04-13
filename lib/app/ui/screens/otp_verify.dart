@@ -49,7 +49,7 @@ class OtpVerify extends StatelessWidget {
                     padding:
                         EdgeInsets.symmetric(horizontal: media.width * 0.01),
                     child: const CommonText(
-                      text: "Otp Verify",
+                      text: "VERIFY OTP",
                       fontSize: AppFontSize.twentyFour,
                       fontWeight: FontWeight.w100,
                       fontColor: AppColors.white,
@@ -129,7 +129,7 @@ class OtpVerify extends StatelessWidget {
                     ),
                     child: const Center(
                       child: CommonText(
-                        text: "Verify Otp",
+                        text: "VERIFY",
                         fontColor: AppColors.white,
                         fontSize: AppFontSize.twenty,
                         fontWeight: FontWeight.bold,
@@ -145,7 +145,7 @@ class OtpVerify extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const CommonText(text: "Didn't receive?"),
+                   CommonText(text: "Didn't receive?",fontColor: AppColors.white.withOpacity(0.8),),
                   SizedBox(width: media.width * 0.02),
                   Obx(() => GestureDetector(
                       onTap: OtpController.to.isStartResend == true
@@ -173,7 +173,7 @@ class OtpVerify extends StatelessWidget {
                             child: CommonText(
                               text:
                                   "Otp auto resend in ${OtpController.to.seconds} secs",
-                              fontColor: AppColors.primary,
+                              fontColor: AppColors.white,
                             )),
                       ],
                     )

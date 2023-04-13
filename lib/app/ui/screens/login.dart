@@ -84,12 +84,12 @@ class Login extends StatelessWidget {
                   children: [
                     TextButton(
                         onPressed: () {
-                          successAlert(context,
-                              content: "Coming soon...",
-                              confirmButtonPressed: () {
-                                Get.back();
-                              });
-                          // Get.to(() => const ForgotPassword());
+                          // successAlert(context,
+                          //     content: "Coming soon...",
+                          //     confirmButtonPressed: () {
+                          //       Get.back();
+                          //     });
+                          Get.to(() => const ForgotPassword());
                         },
                         child: const CommonText(
                           text: "Forgot Password ?",

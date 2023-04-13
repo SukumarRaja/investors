@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../ui/themes/colors.dart';
 
 final Shader mainAmountGradient = const LinearGradient(
@@ -47,6 +48,14 @@ String dateToYear({required date}) {
 
 String monthNameToMonthNumber({required String date}) {
   var dateTime = DateFormat("yyyy-MM-dd").parse(date, true);
+  // var localTime = dateTime.toLocal();
+  var outputFormat = DateFormat('MM');
+  var outputDate = outputFormat.format(dateTime);
+  return outputDate;
+}
+
+String monthNameToMonthNumberForAnalytics({required String date}) {
+  var dateTime = DateFormat("dd-MM-yyyy").parse(date, true);
   // var localTime = dateTime.toLocal();
   var outputFormat = DateFormat('MM');
   var outputDate = outputFormat.format(dateTime);
@@ -128,4 +137,25 @@ String addSpace({required String text}) {
   var t =
       text.replaceAllMapped(RegExp(r".{4}"), (match) => "${match.group(0)} ");
   return t;
+}
+String getCurrentDate() {
+  var currentTime = DateTime.now();
+  var time = DateFormat('dd-MM-yyyy').format(currentTime);
+  return time;
+}
+String monthyearSeparate({required String date}) {
+  var dateTime = DateFormat("dd-MM-yy").parse(date, true);
+  // var localTime = dateTime.toLocal();
+  var outputFormat = DateFormat('MM-yy');
+  var outputDate = outputFormat.format(dateTime);
+  return outputDate;
+}
+
+openBrowser({required url}) async {
+  if (!await launchUrl(
+    Uri.parse(url),
+    mode: LaunchMode.externalApplication,
+  )) {
+    throw 'Could not launch $url';
+  }
 }

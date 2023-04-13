@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:investors/app/ui/themes/font_size.dart';
+import 'package:investors/app/ui/widgets/analytics/dropdown.dart';
 import '../../../controller/withdraw.dart';
 import '../../themes/colors.dart';
 import 'common_text.dart';
@@ -543,6 +545,69 @@ withDrawRequestAlert(BuildContext context,
       cancelButton,
       continueButton,
     ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+updateMonthYearDialog(BuildContext context,
+    {required String content, required Function() confirmButtonPressed,required Function() cancelButtonPressed}) {
+  // set up the buttons
+  Widget cancelButton = TextButton(
+    child: Container(
+      height: 30,
+      width: 80,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10), color: Colors.red),
+      child: const Center(
+        child: Text(
+          "Cancel",
+          style: TextStyle(color: AppColors.black),
+        ),
+      ),
+    ),
+    onPressed: cancelButtonPressed
+  );
+  Widget continueButton = TextButton(
+    onPressed: confirmButtonPressed,
+    child: Container(
+      height: 30,
+      width: 80,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10), color: Colors.green),
+      child: const Center(
+        child: Text(
+          "Confirm",
+          style: TextStyle(color: AppColors.black),
+        ),
+      ),
+    ),
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    alignment: Alignment.center,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(15.0),
+      ),
+    ),
+    backgroundColor: Colors.grey.shade300,
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [CommonText(text: "Choose Month and Year",fontWeight: FontWeight.bold,fontSize: AppFontSize.twenty,)],
+    ),
+    content: Dropdownmonth(text: 'Month'),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+    actionsAlignment: MainAxisAlignment.center,
   );
 
   // show the dialog
